@@ -334,7 +334,7 @@ export const doctrineFrontDoor = {
   "codexware": {
     "slug": "codexware",
     "name": "Codexware",
-    "tagline": "Putting institutional computational tools into individual hands.",
+    "tagline": "Institutional tools, in your hands.",
     "lead": "Codexware is Boundary First Labs’ flagship software application and computational platform.",
     "support": "It is being developed to help people understand requirements, preserve evidence, examine consequential decisions and exercise greater agency in the systems they depend on.",
     "sections": [
@@ -757,8 +757,8 @@ export const doctrineFrontDoor = {
   "observatory": {
     "slug": "observatory",
     "name": "Observatory",
-    "eyebrow": "Public research exhibition",
-    "tagline": "What representations preserve, and what they leave out.",
+    "eyebrow": "Public research exhibits",
+    "tagline": "What models show. What they leave out.",
     "lead": "Selected research questions, demonstrations and methods from mathematics, computation, physics, institutions and economics.",
     "support": "The working laboratory remains private. Each public exhibit states the scope of its evidence and what it can establish.",
     "foundationsHeading": "Intellectual foundations",
@@ -887,7 +887,7 @@ export const doctrineFrontDoor = {
       }
     ],
     "exhibit": {
-      "eyebrow": "Illustrative demonstration · fictional records",
+      "eyebrow": "Teaching example · fictional records",
       "title": "When one word hides two different states.",
       "intro": "Imagine two service requests that both display the label “Complete.” Their underlying situations differ.",
       "cases": [
@@ -927,8 +927,8 @@ export const doctrineFrontDoor = {
     "slug": "digital-native-institution",
     "href": "/digital-native-institution",
     "name": "A Digital-Native Institution",
-    "eyebrow": "How Boundary First Labs works",
-    "tagline": "One person, supported by carefully governed computational tools.",
+    "eyebrow": "How the Lab works",
+    "tagline": "One person, with tools under human control.",
     "lead": "We organize research and engineering around durable digital knowledge, computational instruments and explicit human responsibility.",
     "support": "Our institutional capacity comes from years of accumulated work, software and governed computational assistance rather than a large staff or traditional departmental structure.",
     "homeIntro": {
@@ -1073,8 +1073,8 @@ export const doctrineFrontDoor = {
     {
       "slug": "work-with-us/professional-services",
       "name": "Professional Services",
-      "eyebrow": "Commission work · Available for discussion",
-      "tagline": "Understand the system before committing to the intervention.",
+      "eyebrow": "Commissioned work · Inquiries open",
+      "tagline": "Understand the system before deciding what to change.",
       "lead": "Bring a system that is expensive to misunderstand. We help reconstruct how it works, where it fails, what must be preserved, and which intervention is worth undertaking.",
       "support": "Boundary First Labs is a solo-operated, computationally leveraged research and engineering institution. Engagements are sized to actual capacity and agreed deliverables; specialist collaborators are sought when the work requires them.",
       "statusTitle": "Start with a bounded diagnostic",
@@ -1139,8 +1139,8 @@ export const doctrineFrontDoor = {
     {
       "slug": "work-with-us/paper-auditing",
       "name": "Scientific Paper Auditing",
-      "eyebrow": "Commission work · Pilot inquiries",
-      "tagline": "Make claims inspectable, reproducible and defensible.",
+      "eyebrow": "Commissioned work · Pilot inquiries",
+      "tagline": "Make claims traceable and results reproducible.",
       "lead": "We are developing an independent, computationally assisted research review practice that traces claims to their definitions, assumptions, evidence and dependencies.",
       "support": "Authors, laboratories, journals and research organizations can discuss a bounded review. This is a pilot offering, not a released automated service, peer review or accredited certification.",
       "statusTitle": "Pilot review model",
@@ -1205,7 +1205,7 @@ export const doctrineFrontDoor = {
     {
       "slug": "work-with-us/public-service",
       "name": "Government and Public Service",
-      "eyebrow": "Collaborate with us · Partnership inquiries",
+      "eyebrow": "Public partnerships · Inquiries open",
       "tagline": "Make public systems understandable, accountable and repairable.",
       "lead": "We seek collaborations with public agencies, civic organizations, researchers and communities to investigate consequential failures and support practical, lawful improvements.",
       "support": "The concern is public good: make the consequences of institutional and technical systems visible, reduce unnecessary human compensation and preserve the capacity of people to participate in decisions affecting them.",
@@ -1271,8 +1271,8 @@ export const doctrineFrontDoor = {
     {
       "slug": "work-with-us/funding",
       "name": "Funding, Investment and Sponsorship",
-      "eyebrow": "Support the institution · Discussion only",
-      "tagline": "Sustain independent inquiry by making its discoveries useful.",
+      "eyebrow": "Support inquiries · Discussion only",
+      "tagline": "Useful discoveries sustain independent research.",
       "lead": "Useful applied work, independent research support and responsibly developed computational capabilities are the proposed means of sustaining Boundary First Labs.",
       "support": "We are currently solo-operated. We seek capacity for bounded investigations, engineering, qualified external review, reproducibility, knowledge transfer and public-interest infrastructure—not headcount growth for its own sake.",
       "statusTitle": "A conversation, not an investment offering",
@@ -1339,8 +1339,8 @@ export const doctrineFrontDoor = {
     {
       "slug": "observatory/intellectual-lineage",
       "name": "Intellectual lineage",
-      "eyebrow": "Observatory · Exhibit 01 · Historical orientation",
-      "directoryLabel": "01 · Historical orientation",
+      "eyebrow": "Observatory · Exhibit 01 · Origins",
+      "directoryLabel": "01 · Origins",
       "tagline": "Engineering practice shaped the research questions.",
       "lead": "Boundary First begins in the work of understanding and repairing systems. Its intellectual foundations are inherited from established disciplines; its research questions arise where their representations meet consequential practice.",
       "support": "This is a selective account of the intellectual formation of the laboratory, not an exhaustive bibliography, a claim of priority, or proof of a scientific theory.",
@@ -1396,8 +1396,8 @@ export const doctrineFrontDoor = {
     {
       "slug": "observatory/research-architecture",
       "name": "Research architecture",
-      "eyebrow": "Observatory · Exhibit 02 · Research-program orientation",
-      "directoryLabel": "02 · Research-program orientation",
+      "eyebrow": "Observatory · Exhibit 02 · Research directions",
+      "directoryLabel": "02 · Research directions",
       "tagline": "Depth tests validity. Breadth tests relevance.",
       "lead": "The laboratory investigates the relationships between representation, transformation and consequence through several interacting research directions. The aim is to develop reusable understanding without erasing the distinct requirements of each domain.",
       "support": "The diagram and categories here describe functional roles and questions, not the private dependency graph, a complete theory, or an assertion that the domains reduce to one another.",
@@ -1474,9 +1474,9 @@ export const doctrineFrontDoor = {
     {
       "slug": "observatory/computational-inquiry",
       "name": "Computationally leveraged inquiry",
-      "eyebrow": "Observatory · Exhibit 03 · Functional architecture",
-      "directoryLabel": "03 · Functional architecture",
-      "tagline": "Make inquiry persistent, inspectable and correctable.",
+      "eyebrow": "Observatory · Exhibit 03 · Research functions",
+      "directoryLabel": "03 · Research functions",
+      "tagline": "Preserve research. Make it checkable and correctable.",
       "lead": "Boundary First Labs is currently a solo-operated institution. Its computational tools are intended to extend what one person can research, build and verify, while keeping direction and responsibility with people.",
       "support": "This exhibit explains the functions that a durable research environment must support, not its internal software design, data model, automation contracts or performance specifications.",
       "sections": [
@@ -1535,9 +1535,9 @@ export const doctrineFrontDoor = {
     {
       "slug": "observatory/demonstrations",
       "name": "Selected demonstrations",
-      "eyebrow": "Observatory · Exhibit 04 · Illustrative demonstrations",
-      "directoryLabel": "04 · Illustrative demonstrations",
-      "tagline": "Small examples. Explicit assumptions. Limited conclusions.",
+      "eyebrow": "Observatory · Exhibit 04 · Teaching examples",
+      "directoryLabel": "04 · Teaching examples",
+      "tagline": "Small examples. Clear assumptions. Limited conclusions.",
       "lead": "A carefully chosen example can make a research question tangible without revealing unpublished research. The three examples here use elementary arithmetic and fictional records; each is independently checkable from the information shown.",
       "support": "These are teaching constructions prepared for the exhibition, not demonstrations of a proprietary algorithm, live client data, an empirical performance benchmark or newly established scientific results.",
       "sections": [
@@ -1595,7 +1595,7 @@ export const doctrineFrontDoor = {
   "economicMaintenance": {
     "slug": "codexware/economic-maintenance",
     "name": "Economic Maintenance",
-    "eyebrow": "Codexware · Research behind the application",
+    "eyebrow": "Codexware · Behind the application",
     "tagline": "What does it cost to sustain a life?",
     "lead": "Our Economic Water Model research examines stocks, flows, access constraints, institutional obligations and material consequences. We investigate how monetary resources relate to the conditions they are intended to support.",
     "support": "These are reasons to build individual-directed computational tools: to make requirements, resources, obligations, evidence and the consequences of decisions more legible. This is a research and application-design exhibit, not a released economic product. A balanced transaction does not necessarily produce a viable outcome. A repair can be technically possible while remaining inaccessible under a household’s resource and obligation constraints. Maintaining a life is work: access to transportation, housing, connectivity and essential services can be interdependent. Investigate when resources become available, not only how much exists.",
@@ -1842,7 +1842,7 @@ export const doctrineFrontDoor = {
     "slug": "observatory/instruments",
     "eyebrow": "Observatory · Teaching collection",
     "name": "Instruments",
-    "tagline": "From mathematical structure to practical consequence.",
+    "tagline": "From mathematics to practical problems.",
     "lead": "Explore what a system can distinguish, what its records preserve, what it takes to make repair accessible, and how computational authority can be bounded.",
     "support": "Six small exhibits: three interactive teaching models and three worked examples. Each starts with a recognizable problem and states precisely what its evidence can establish.",
     "intro": "Different problems. Shared computational foundations. We develop general capabilities through specific, inspectable problems. These public exhibits are deliberately simplified constructions, not interfaces to private research engines.",
@@ -2405,7 +2405,7 @@ export const doctrineFrontDoor = {
   "trustCenter": {
     "slug": "evidence-and-trust",
     "name": "Evidence & Trust",
-    "eyebrow": "Institutional foundations · Inspect the work",
+    "eyebrow": "Our standards",
     "tagline": "An institution answerable to evidence.",
     "lead": "You should be able to examine the work before deciding whether to trust it.",
     "support": "Boundary First Labs is an independent, founder-led, digital-native research and engineering institution. We distinguish what we have constructed, what we have investigated, what the evidence supports, and what remains unresolved. Intellectual independence is not exemption from evidence.",
@@ -2787,7 +2787,7 @@ export const doctrineFrontDoor = {
   "appliedProducts": {
     "href": "/work-with-us/funding",
     "anchorId": "reader-example",
-    "heading": "From foundational research to applied products",
+    "heading": "Applied product development",
     "intro": "Support can help turn research and engineering into accessible software, independently evaluated capabilities and practical integrations. The following are proposed development directions, not available products or validated commercial offerings.",
     "items": [
       {
