@@ -145,6 +145,56 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
     results.push({name: "BFUX reader: " + label + " @ " + mode.name, issues, focusSamples, captures, captureFrames});
   }
   try {
+    await scenario("product identity and cross-page funding fragment", async (_checkFocus, capture) => {
+      const portfolio = doctrineFrontDoor.appliedProducts;
+      await open(page, base, "/codexware");
+      const hero = page.locator("[data-institutional-hero]");
+      assert.equal(await hero.locator("h1").textContent(), "Codexware");
+      assert.ok((await hero.locator("p").allTextContents()).some(text => text.includes("flagship software application and computational platform")), "Codexware must establish product identity at arrival");
+      await fit(page);
+      await capture("codexware-product-identity");
+      for (const source of ["/", "/observatory"]) {
+        await open(page, base, source);
+        const context = source === "/" ? "home" : "observatory";
+        const pathway = page.locator(`[data-applied-product-pathway="${context}"]`);
+        await capture(context + "-applied-product-pathway", pathway, {frameStart:true});
+        const link = pathway.locator("a");
+        assert.equal(await link.getAttribute("href"), portfolio.href + "#" + portfolio.anchorId);
+        await link.click();
+        await page.waitForURL(url => url.pathname === portfolio.href && url.hash === "#" + portfolio.anchorId);
+        await page.evaluate(() => document.fonts.ready);
+        await page.waitForFunction(id => {
+          const target = document.getElementById(id);
+          const rail = document.querySelector("[data-reader-section-nav]");
+          const header = document.querySelector("header[data-header-compact]");
+          if (!target || !rail || !header || rail.getAttribute("data-section-nav-ready") !== "true") return false;
+          const edge = header.getBoundingClientRect().bottom + (getComputedStyle(rail).getPropertyValue("--reader-local-sticky").trim() !== "0" ? rail.getBoundingClientRect().height : 0);
+          const rect = target.getBoundingClientRect();
+          return rail.querySelector('a[aria-current="location"]')?.getAttribute("href") === "#" + id && rect.top >= edge - 2 && rect.bottom <= innerHeight;
+        }, portfolio.anchorId, {timeout:10000});
+        const samples = await page.evaluate(async id => {
+          const output = [];
+          for (let frame = 0; frame < 5; frame++) {
+            await new Promise(resolve => requestAnimationFrame(resolve));
+            const target = document.getElementById(id);
+            const rail = document.querySelector("[data-reader-section-nav]");
+            const header = document.querySelector("header[data-header-compact]");
+            const edge = header.getBoundingClientRect().bottom + (getComputedStyle(rail).getPropertyValue("--reader-local-sticky").trim() !== "0" ? rail.getBoundingClientRect().height : 0);
+            const rect = target.getBoundingClientRect();
+            output.push({hash:location.hash, current:rail.querySelector('a[aria-current="location"]')?.getAttribute("href"), gap:rect.top-edge, bottom:rect.bottom, height:innerHeight});
+          }
+          return output;
+        }, portfolio.anchorId);
+        assert.ok(samples.every(s => s.hash === "#" + portfolio.anchorId && s.current === s.hash && s.gap >= -2 && s.bottom <= s.height), "cross-page product fragment must settle below the sticky navigation: " + JSON.stringify(samples));
+        const panel = page.locator("[data-applied-product-portfolio]");
+        assert.deepEqual(await panel.locator("[data-applied-product]").evaluateAll(nodes => nodes.map(node => node.getAttribute("data-applied-product"))), portfolio.items.map(item => item.id));
+        await fit(page);
+        await capture(context + "-funding-arrival");
+        await page.goBack();
+        await page.waitForURL(url => url.pathname === source && !url.hash);
+        await link.waitFor({state:"visible"});
+      }
+    });
     await scenario("orientation and reversible reader disclosure", async (checkFocus, capture) => {
       await open(page, base, "/");
       const wordmark = page.locator("header [data-institutional-wordmark]");
