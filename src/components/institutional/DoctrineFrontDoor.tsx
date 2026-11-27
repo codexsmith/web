@@ -160,6 +160,11 @@ export function DoctrineHomePage() {
           <div className={styles.cards} data-reader-collection="gateway">{home.paths.map(path => <Link className={styles.card} key={path.href} href={path.href}><span className={styles.num} data-reader-kicker><ReaderRouteGlyph href={path.href} /><span>{path.tagline}</span></span><h3>{path.title}</h3><p data-reader-gateway-description>{path.body}</p><span className={styles.arrow} data-reader-gateway-action>{path.label} <span aria-hidden="true">→</span></span></Link>)}</div>
           <p className={styles.smallPrint}>{home.commitmentLine}</p>
         </section>
+        <section className={styles.section} data-applied-product-pathway="home" aria-labelledby="home-applied-products">
+          <h2 id="home-applied-products">{content.appliedProducts.pathways.home.heading}</h2>
+          <p className={styles.sectionIntro}>{content.appliedProducts.pathways.home.body}</p>
+          <Link className={styles.textLink} href={`${content.appliedProducts.href}#${content.appliedProducts.anchorId}`}>{content.appliedProducts.pathways.home.label} <span aria-hidden="true">→</span></Link>
+        </section>
         <section className={`${styles.section} ${styles.callout}`} aria-labelledby="maintenance-title">
           <div>
             <h2 id="maintenance-title">{maintenance.title}</h2>
@@ -226,7 +231,7 @@ export function CodexwareIntroductionPage() {
         <section className={`${styles.hero} ${styles.doctrineHero}`} data-institutional-hero>
           <Link className={styles.back} href="/">← Boundary First Labs</Link>
           <h1>{c.name}</h1>
-          <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Application vision · In development</p><p className={styles.tagline}>{c.tagline}</p></div>
+          <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Flagship application · In development</p><p className={styles.tagline}>{c.tagline}</p></div>
           <p className={styles.lead}>{c.lead}</p><p className={styles.support}>{c.support}</p>
           <ReaderMastheadField kind="operation" />
         </section>
@@ -383,7 +388,15 @@ export function EngagementGuidePage({ slug }: { slug: EngagementGuideSlug }) {
         <div className={styles.reading} data-guide-method><div><ReadingSections sections={guide.sections} /></div>
           <aside className={styles.example} data-guide-status><h2>{guide.statusTitle}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Engagement status</p></div><p>{guide.status}</p></aside>
         </div>
-        <section className={styles.section} data-guide-example><h2 id="reader-example" tabIndex={-1} data-reader-section-target>{guide.exampleTitle}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Example, not a completed engagement</p><p className={styles.sectionIntro}>{guide.example}</p></div></section>
+        <section className={styles.section} data-guide-example>
+          <h2 id="reader-example" tabIndex={-1} data-reader-section-target>{guide.exampleTitle}</h2>
+          {slug === "work-with-us/funding" && <div data-applied-product-portfolio>
+            <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>{content.appliedProducts.heading}</p><p className={styles.sectionIntro}>{content.appliedProducts.intro}</p></div>
+            <div className={styles.pathGrid} data-reader-collection="reference">{content.appliedProducts.items.map(item => <article className={styles.pathCard} key={item.id} data-applied-product={item.id}><p className={styles.workStatus}>{item.status}</p><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+            <p className={styles.sectionIntro}>{content.appliedProducts.closing}</p>
+          </div>}
+          <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Example, not a completed engagement</p><p className={styles.sectionIntro}>{guide.example}</p></div>
+        </section>
         <blockquote className={styles.principle}>{guide.principle}</blockquote>
         <section className={styles.section} data-guide-contact><h2 id="reader-guide-contact" tabIndex={-1} data-reader-section-target>Start a conversation.</h2><p className={styles.sectionIntro}>{guide.ask}</p>
           <div className={styles.links}><Link className={styles.action} href="/contact">Contact the Lab</Link><a className={styles.textLink} href={`${PUBLIC_CONTACT_MAILTO}?subject=${encodeURIComponent(guide.subject)}`}>{PUBLIC_CONTACT_EMAIL}</a></div>
