@@ -99,6 +99,11 @@ const guideBody = front.split("export function EngagementGuidePage(")[1] ?? "";
 check(guideBody.includes('data-engagement-guide={slug}') && guideBody.includes('href="/work-with-us"') && guideBody.includes('href="/contact"'), "guide renderer, return link and contact");
 for (const marker of ["offers", "method", "status", "example", "contact"]) check(guideBody.includes(`data-guide-${marker}`), `guide renderer exposes ${marker}`);
 check(/<DoctrineLinksSection context=\{slug\}\s*\/>\s*<\/div>\s*<\/InstitutionalPageShell>/.test(guideBody), "guide ends with shared doctrine section");
+const portfolio = content.appliedProducts;
+check(portfolio.href === "/work-with-us/funding" && portfolio.anchorId === "reader-example" && admitted.has(portfolio.href), "applied product pathway uses the admitted funding route and stable section anchor");
+check(equal(portfolio.items.map(item => item.id), ["weather", "chess", "sports", "integrations"]) && portfolio.items.every(item => item.status && item.body) && portfolio.intro.includes("not available products"), "four applied product directions with explicit maturity boundaries");
+check(content.codexware.lead.includes("flagship software application and computational platform") && content.home.paths[0].tagline === "Flagship application", "Codexware identity precedes purpose");
+check(front.includes('data-applied-product-pathway="home"') && observatoryPage.includes('data-applied-product-pathway="observatory"') && front.includes('data-applied-product-portfolio') && front.includes('id="reader-example"'), "homepage and Observatory pathways resolve to the rendered funding portfolio");
 console.log("Doctrine front-door and engagement-guide source contracts passed.");
 
 const exhibitRoutes = ["/observatory/intellectual-lineage", "/observatory/research-architecture", "/observatory/computational-inquiry", "/observatory/demonstrations"];
