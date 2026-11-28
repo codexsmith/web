@@ -1311,10 +1311,10 @@
 /* A compact reader must retain the current section's name, not only its
  * ordinal. The enclosing nav retains the "On this page" accessible name. */
 @media (max-width: 820px) {
-  .surface [data-observatory-reader] .sectionNav [data-section-nav-prompt] {
+  .surface :is([data-observatory-reader],[data-engagement-guide="work-with-us/funding"]) .sectionNav [data-section-nav-prompt] {
     display: none;
   }
-  .surface [data-observatory-reader] .sectionNavCurrent {
+  .surface :is([data-observatory-reader],[data-engagement-guide="work-with-us/funding"]) .sectionNavCurrent {
     display: block;
     flex: 1 1 auto;
     font-weight: 700;
