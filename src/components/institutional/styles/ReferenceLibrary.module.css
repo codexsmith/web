@@ -21,7 +21,7 @@
   border-top: 3px solid var(--old-gold, #b89a47);
   padding: clamp(14px, 2.4vw, 24px);
 }
-.controls label { display: grid; gap: 6px; min-width: 0; font-size: .85rem; font-weight: 600; }
+.controls label, .field { display: grid; gap: 6px; min-width: 0; font-size: .85rem; font-weight: 600; }
 .controls input, .controls select, .reset {
   box-sizing: border-box;
   min-width: 0;

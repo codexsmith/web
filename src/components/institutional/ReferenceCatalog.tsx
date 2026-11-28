@@ -22,26 +22,29 @@ export function ReferenceCatalog({ works }: { works: readonly ReferenceWork[] })
         <label className={styles.search}>Search titles, authors and disciplines
           <input type="search" value={filters.query} onChange={event => update("query", event.currentTarget.value)} placeholder="e.g. Grothendieck, logic, 1957" autoComplete="off" />
         </label>
-        <label>Author
-          <select value={filters.author} onChange={event => update("author", event.currentTarget.value)}>
+        <div className={styles.field}>
+          <label htmlFor="reference-author">Author</label>
+          <select id="reference-author" value={filters.author} onChange={event => update("author", event.currentTarget.value)}>
             <option value="">All authors</option>
             {facets.authors.map(author => <option key={author} value={author}>{author}</option>)}
           </select>
-        </label>
-        <label>Discipline
-          <select value={filters.discipline} onChange={event => update("discipline", event.currentTarget.value)}>
+        </div>
+        <div className={styles.field}>
+          <label htmlFor="reference-discipline">Discipline</label>
+          <select id="reference-discipline" value={filters.discipline} onChange={event => update("discipline", event.currentTarget.value)}>
             <option value="">All disciplines</option>
             {facets.disciplines.map(discipline => <option key={discipline} value={discipline}>{discipline}</option>)}
           </select>
-        </label>
-        <label>Order
-          <select value={filters.sort} onChange={event => {
+        </div>
+        <div className={styles.field}>
+          <label htmlFor="reference-order">Order</label>
+          <select id="reference-order" value={filters.sort} onChange={event => {
             const value = event.currentTarget.value;
             if (value === "curated" || value === "year" || value === "title") update("sort", value);
           }}>
             <option value="curated">Curated order</option><option value="year">Publication year</option><option value="title">Title A–Z</option>
           </select>
-        </label>
+        </div>
         <button type="button" className={styles.reset} onClick={() => setFilters(initialCatalogFilters)}>Reset</button>
       </div>
       <p role="status" className={styles.count} data-reference-count>{results.length} of {works.length} reference works</p>

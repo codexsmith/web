@@ -996,6 +996,11 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         const discipline = catalog.getByLabel("Discipline",{exact:true});
         const order = catalog.getByLabel("Order",{exact:true});
         const reset = catalog.getByRole("button",{name:"Reset",exact:true});
+        // Explicit label/control associations preserve stable label text, independent of option text.
+        for (const [name, locator] of [["Author",author],["Discipline",discipline],["Order",order]]) {
+          assert.equal(await locator.count(),1,name+" must have one exact label association");
+          assert.equal(await catalog.getByRole("combobox",{name,exact:true}).count(),1,name+" must have one accessible combobox name");
+        }
         await input.fill("oystein ore");
         await textIs(page,"[data-reference-count]","1 of 56 reference works");
         assert.deepEqual(await ids(),["ore-galois"]);
