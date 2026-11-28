@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import assert from "node:assert/strict";
-import { institutionalPublicationEntries, curatedReaderRoutes, institutionalDiscoveryRoutes, supportingPublicationEntries } from "../src/lib/site-publication.ts";
+import { institutionalPublicationEntries, curatedReaderRoutes, institutionalDiscoveryRoutes, supportingPublicationEntries, suspendedPublicationRoutes, suspendedPublicationDestination } from "../src/lib/site-publication.ts";
 
 const read = (path) => fs.readFileSync(path, "utf8");
 const expectedInstitutional = [
@@ -82,4 +82,21 @@ assert.ok(sitemap.includes("institutionalDiscoveryRoutes") && !sitemap.includes(
 const config = read("next.config.ts");
 assert.ok(config.includes("institutionalReferenceRoutes.map") && config.includes('key: "X-Robots-Tag", value: "noindex, follow"'), "Reference routes need a crawl-visible noindex response");
 assert.ok(release.includes("!discoveryRouteSet.has(route)"), "Reference policy is the complement of discovery within admitted routes");
+// Edition suspension is independent of the legacy catalog's continued existence.
+assert.equal(new Set(suspendedPublicationRoutes).size, suspendedPublicationRoutes.length, "Suspended routes must be unique");
+assert.ok(paths.includes(suspendedPublicationDestination), "Suspension redirects to an admitted reader");
+for (const route of suspendedPublicationRoutes) {
+  assert.ok(!inventory.includes(route) && !paths.includes(route), "Suspended route cannot enter the release inventory: " + route);
+  const page = read("src/app" + route + "/page.tsx");
+  assert.ok(page.includes("redirect(suspendedPublicationDestination)") && !/PaperMineView|paperMineSnapshot|@\/lib\/paper-mine/.test(page), "Suspended route must not import or render the old catalog");
+}
+assert.ok(config.includes("...suspendedPublicationRoutes.map") && config.includes("destination: suspendedPublicationDestination") && config.includes("permanent: false"), "The reserved route must use temporary compatibility redirection");
+for (const file of [
+  "src/lib/content.ts",
+  "src/lib/content-registry.ts",
+  "src/components/institutional/institutionalRoutes.ts",
+  "src/components/institutional/InstitutionalResearchPage.tsx",
+]) {
+  assert.ok(!read(file).includes("/research/paper-mine"), "Suspended edition must not have a reader-facing route declaration: " + file);
+}
 console.log(`Publication governance passed: ${expectedInstitutional.length} institutional, ${expectedSupporting.length} supporting, ${reference.length} reference routes; ${inventory.length} available routes.`);

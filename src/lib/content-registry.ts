@@ -54,23 +54,6 @@ export type { PublicationMetadata, PublicationStage } from "@/lib/publication-ty
 export type { RelationDirection } from "@/lib/relation-semantics";
 
 
-const paperMineNavigation: Partial<Record<"research" | "publications", NonNullable<ContentNode["links"]>[number]>> = {
-  research: {
-    label: "Paper Mine",
-    href: "/research/paper-mine",
-    eyebrow: "Featured research workbench",
-    summary:
-      "Inspect the corpus-wide paper field across controlled Stage A/B/C publication objects and mined candidates by discipline, field, stage, readiness, claim ceiling, evidence obligation, provenance, and paperization frontier.",
-  },
-  publications: {
-    label: "Paper Mine",
-    href: "/research/paper-mine",
-    eyebrow: "Featured publication discovery",
-    summary:
-      "See the canonical discovery-to-publication field spanning mined candidates, controlled publication objects, readiness, claim ceilings, provenance, queue state, and human promotion gates.",
-  },
-};
-
 const founderTimelineNavigation: Partial<Record<"about" | "provenance", NonNullable<ContentNode["links"]>[number]>> = {
   about: {
     label: "Founder & Intellectual Provenance Timeline",
@@ -87,21 +70,6 @@ const founderTimelineNavigation: Partial<Record<"about" | "provenance", NonNulla
       "Inspect the typed chronology, evidence classes, lineage, source surfaces, and unresolved provenance work behind the Lab's current architecture.",
   },
 };
-
-function withPaperMineNavigation(node: ContentNode): ContentNode {
-  const paperMineLink = node.id === "research" || node.id === "publications"
-    ? paperMineNavigation[node.id]
-    : undefined;
-  if (!paperMineLink) return node;
-
-  return {
-    ...node,
-    links: [
-      paperMineLink,
-      ...(node.links ?? []).filter((link) => link.href !== paperMineLink.href),
-    ],
-  };
-}
 
 function withFounderTimelineNavigation(node: ContentNode): ContentNode {
   const timelineLink = node.id === "about" || node.id === "provenance"
@@ -127,7 +95,7 @@ const rawNodes: ContentNode[] = [
 
 export const nodes: ContentNode[] = rawNodes.map((node) => {
   const localSections = getLocalSections(node.id);
-  const enrichedNode = withFounderTimelineNavigation(withPaperMineNavigation(node));
+  const enrichedNode = withFounderTimelineNavigation(node);
   return localSections.length ? { ...enrichedNode, localSections } : enrichedNode;
 });
 

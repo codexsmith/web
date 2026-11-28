@@ -98,7 +98,6 @@ export const institutionalPublicRoutes = [
   "/publications",
   "/representation-atlas",
   "/research",
-  "/research/paper-mine",
   ...institutionalContentNodeRoutes,
   "/research/moonshots",
   "/research/moonshots/research-operating-system",

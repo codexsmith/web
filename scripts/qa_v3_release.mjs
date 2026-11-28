@@ -4,7 +4,7 @@ import { spawn } from "node:child_process";
 import { pathToFileURL } from "node:url";
 import { doctrineNavigationIssues, verifyDoctrineTraversals } from "./lib/doctrine_navigation_qa.mjs";
 import { verifyReaderUx } from "./lib/reader_ux_qa.mjs";
-import { institutionalPublicationEntries, institutionalDiscoveryRoutes, supportingPublicationEntries } from "../src/lib/site-publication.ts";
+import { institutionalPublicationEntries, institutionalDiscoveryRoutes, supportingPublicationEntries, suspendedPublicationRoutes, suspendedPublicationDestination } from "../src/lib/site-publication.ts";
 
 const harnessModule = process.env.V3_RELEASE_QA_PLAYWRIGHT_MODULE;
 const { chromium } = await import(harnessModule ? pathToFileURL(harnessModule).href : "playwright");
@@ -381,6 +381,11 @@ async function visit(browser, config) {
   const issues = await doctrineNavigationIssues(page, config.route);
 
   if (!response?.ok()) issues.push(`HTTP ${response?.status() ?? "no response"}`);
+  const suspendedLinks = await page.locator("a[href]").evaluateAll((anchors, suspended) =>
+    anchors.map(anchor => new URL(anchor.href, document.baseURI))
+      .filter(url => url.origin === window.location.origin && suspended.includes(url.pathname.replace(/\/+$/, "")))
+      .map(url => url.pathname), [...suspendedPublicationRoutes]);
+  if (suspendedLinks.length) issues.push("Reader links to a suspended publication edition");
   const publicationTier = publicationTiers.get(config.route) ?? "reference";
   const robotsHeader = response?.headers()["x-robots-tag"] ?? "";
   const headerNoindex = /\bnoindex\b/i.test(robotsHeader);
@@ -725,6 +730,27 @@ async function checkPublicationDiscovery() {
   results.push({ name, indexingEnabled, expected, actual, disallowed, issues });
 }
 
+async function checkSuspendedPublicationRoutes() {
+  for (const route of suspendedPublicationRoutes) {
+    for (const query of ["", "?view=record"]) {
+      const response = await fetch(base + route + query, { redirect: "manual" });
+      const location = response.headers.get("location");
+      const issues = [];
+      if (response.status !== 307) issues.push("Suspended edition must return temporary HTTP 307");
+      if (!location || new URL(location, base).pathname !== suspendedPublicationDestination) {
+        issues.push("Suspended edition must return the reader to the Observatory");
+      }
+      const body = await response.text();
+      if (/paperMineSnapshot|Private Lab provenance|paper-shaped candidates|source_paths/.test(body)) {
+        issues.push("Suspended response contains legacy catalog material");
+      }
+      const name = "Suspended publication edition " + route + query;
+      recordFailure(name, issues);
+      results.push({ name, responseStatus: response.status, location, issues });
+    }
+  }
+}
+
 function writeReport() {
   const report = {
     generatedAt: new Date().toISOString(),
@@ -802,6 +828,7 @@ let browser;
 try {
   await waitForServer(server);
   await checkPublicationDiscovery();
+  await checkSuspendedPublicationRoutes();
   browser = await chromium.launch({ headless: true });
 
   for (const visitConfig of visits) {
