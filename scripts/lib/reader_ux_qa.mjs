@@ -189,6 +189,22 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         const panel = page.locator("[data-applied-product-portfolio]");
         assert.deepEqual(await panel.locator("[data-applied-product]").evaluateAll(nodes => nodes.map(node => node.getAttribute("data-applied-product"))), portfolio.items.map(item => item.id));
         await fit(page);
+        const rows = await panel.locator("[data-applied-product]").evaluateAll(nodes => nodes.map(node => {
+          const identity = node.querySelector("[data-reader-path-identity]");
+          const description = node.querySelector("[data-reader-path-content]");
+          const title = identity?.querySelector("h3");
+          const status = identity?.querySelector("p");
+          const a = identity?.getBoundingClientRect(), b = description?.getBoundingClientRect();
+          const wide = innerWidth >= 960;
+          return {id:node.getAttribute("data-applied-product"), grouped:!!title && !!status && title.compareDocumentPosition(status) & 4 && !!a && !!b,
+            ordered:!!a && !!b && (wide ? a.right <= b.left + 1 : a.bottom <= b.top + 1)};
+        }));
+        assert.ok(rows.every(row => row.grouped && row.ordered), "product identity and status must precede description in the rendered reading order: " + JSON.stringify(rows));
+        if (mode.viewport.width <= 820) {
+          const current = page.locator("[data-reader-section-nav] [data-section-nav-label]");
+          assert.ok(await current.isVisible(), "funding current section name must remain visible at narrow widths");
+          assert.equal(await current.textContent(), "What support could make possible");
+        }
         await capture(context + "-funding-arrival");
         await page.goBack();
         await page.waitForURL(url => url.pathname === source && !url.hash);
