@@ -10,7 +10,7 @@ export function CuratedContactPage({initialType}: {initialType: InquiryTypeId}) 
   return <InstitutionalPageShell mainClassName={styles.surface}>
     <div className={styles.wrap}>
       <section className={`${styles.hero} ${styles.doctrineHero}`} data-institutional-hero>
-        <h1>Start with what brought you here.</h1><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Contact</p></div><p className={styles.lead}>{ct.lead}</p>
+        <h1>Start with what brought you here</h1><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Contact</p></div><p className={styles.lead}>{ct.lead}</p>
         <p className={styles.support}>A direct email is enough. No form or category is required.</p>
         <div className={styles.links} data-direct-contact><a className={styles.textLink} href={PUBLIC_CONTACT_MAILTO}>{PUBLIC_CONTACT_EMAIL}</a></div>
       </section>
