@@ -1,0 +1,64 @@
+.hero {
+  border-bottom: 3px solid var(--old-gold, #b89a47);
+}
+.editionNotice {
+  margin: 18px 0 0;
+  padding: 10px 14px;
+  border-left: 3px solid var(--old-gold, #b89a47);
+  background: var(--royal-blue-deep, #0b2554);
+  color: #f7f9fc;
+  font-size: .9rem;
+  font-weight: 600;
+}
+.catalog { min-width: 0; overflow-wrap: anywhere; }
+.controls {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr)) auto;
+  gap: 14px;
+  align-items: end;
+  background: var(--royal-blue-deep, #0b2554);
+  color: #f7f9fc;
+  border-top: 3px solid var(--old-gold, #b89a47);
+  padding: clamp(14px, 2.4vw, 24px);
+}
+.controls label, .field { display: grid; gap: 6px; min-width: 0; font-size: .85rem; font-weight: 600; }
+.controls input, .controls select, .reset {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 9px 10px;
+  font: inherit;
+  color: #0b2147;
+  background: #fff;
+  border: 1px solid #aab9cb;
+  border-radius: 3px;
+}
+.controls input, .controls select { width: 100%; }
+.reset { background: var(--old-gold-bright, #d2b75f); border-color: var(--old-gold, #b89a47); cursor: pointer; }
+.controls :is(input, select, button):focus-visible { outline: 3px solid #efd18a; outline-offset: 3px; }
+.count { color: var(--df-muted, #52627b); font-size: .9rem; margin: 18px 0 8px; }
+.results { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--df-line, #d1dbe6); }
+.record { display: grid; grid-template-columns: minmax(90px, .23fr) minmax(0, 1fr); gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--df-line, #d1dbe6); scroll-margin-top: calc(var(--reader-primary-rail-height, 0px) + var(--reader-section-rail-height, 0px) + 12px); }
+.meta { font-size: .83rem; color: var(--df-muted, #52627b); margin: 3px 0; }
+.description { min-width: 0; }
+.description h3 { font: 600 clamp(1.2rem, 2.2vw, 1.55rem)/1.25 Georgia, serif; margin: 0 0 6px; color: var(--df-ink, #0b2147); }
+.author { color: var(--df-ink, #0b2147); margin: 0 0 6px; }
+.disciplines, .note { color: var(--df-muted, #52627b); font-size: .9rem; margin: 6px 0; }
+.sourceLinks { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 12px; }
+.sourceLinks a { display: inline-flex; align-items: center; min-height: 28px; font-size: .92rem; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; color: var(--df-accent, #153a78); }
+.empty { margin: 20px 0; }
+@media (max-width: 940px) {
+  .controls { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .search { grid-column: 1/-1; }
+}
+@media (max-width: 480px) {
+  .controls { grid-template-columns: minmax(0,1fr); }
+  .record { grid-template-columns: minmax(0,1fr); gap: 6px; }
+}
+@media (forced-colors: active) {
+  .editionNotice,.controls,.controls input,.controls select,.reset { background: Canvas; color: CanvasText; border-color: CanvasText; }
+  .description h3,.author,.meta,.disciplines,.note,.count { color: CanvasText; }
+  .sourceLinks a { color: LinkText; }
+  .controls :is(input,select,button):focus-visible { outline-color: Highlight; }
+}

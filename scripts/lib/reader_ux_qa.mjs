@@ -3,6 +3,8 @@
 import assert from "node:assert/strict";
 import path from "node:path";
 import { doctrineFrontDoor } from "../../src/components/institutional/content/doctrineFrontDoor.ts";
+import { referenceLibrary } from "../../src/components/institutional/content/referenceLibrary.ts";
+import { filterReferences, initialCatalogFilters } from "../../src/components/institutional/referenceCatalogModel.ts";
 
 const focusWitness = async locator => locator.evaluate(async element => {
   // Inspect the painted focus state after layout; still require both actual
@@ -280,7 +282,7 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
     });
     await scenario("title-first compact heading metadata", async (_checkFocus, capture) => {
       const samples = ["/", "/observatory", "/codexware", "/work-with-us", "/constructive-human-agency",
-        "/digital-native-institution", "/evidence-and-trust", "/observatory/intellectual-lineage",
+        "/digital-native-institution", "/evidence-and-trust", "/observatory/intellectual-lineage", "/observatory/reference-library",
         "/observatory/instruments", "/codexware/civic-record", "/codexware/economic-maintenance",
         "/work-with-us/paper-auditing", "/contact"];
       for (const route of samples) {
@@ -975,6 +977,58 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         assert.ok(await summary.evaluate(node => document.activeElement === node), "Escape closes only the local menu and restores trigger focus");
         await fit(page);
       }
+    });
+    await scenario("Reference library metadata and local catalog operation", async (checkFocus, capture) => {
+      await open(page, base, "/observatory/reference-library");
+      const catalog = page.locator("[data-reference-catalog]");
+      await page.waitForFunction(()=>document.querySelector('[data-reference-catalog][data-reference-ready="true"]'));
+      const rows = catalog.locator("[data-reference-id]");
+      const ids = () => rows.evaluateAll(nodes=>nodes.map(n=>n.getAttribute("data-reference-id")));
+      assert.deepEqual(await ids(),referenceLibrary.map(w=>w.id));
+      const rendered = await rows.evaluateAll(nodes=>nodes.map(n=>({id:n.getAttribute("data-reference-id"),title:n.querySelector("h3").textContent,urls:[...n.querySelectorAll("a")].map(a=>a.getAttribute("href"))})));
+      assert.deepEqual(rendered,referenceLibrary.map(w=>({id:w.id,title:w.title,urls:[w.source,...w.links.map(l=>l.url)]})));
+      const requests = [];
+      const onRequest = request => { if (["fetch","xhr","websocket"].includes(request.resourceType()) && !request.url().includes("_rsc=")) requests.push(request.url()); };
+      page.on("request",onRequest);
+      try {
+        const input = catalog.getByRole("searchbox");
+        const author = catalog.getByLabel("Author",{exact:true});
+        const discipline = catalog.getByLabel("Discipline",{exact:true});
+        const order = catalog.getByLabel("Order",{exact:true});
+        const reset = catalog.getByRole("button",{name:"Reset",exact:true});
+        // Explicit label/control associations preserve stable label text, independent of option text.
+        for (const [name, locator] of [["Author",author],["Discipline",discipline],["Order",order]]) {
+          assert.equal(await locator.count(),1,name+" must have one exact label association");
+          assert.equal(await catalog.getByRole("combobox",{name,exact:true}).count(),1,name+" must have one accessible combobox name");
+        }
+        await input.fill("oystein ore");
+        await textIs(page,"[data-reference-count]","1 of 56 reference works");
+        assert.deepEqual(await ids(),["ore-galois"]);
+        await input.fill("grothendieck 1957");
+        await textIs(page,"[data-reference-count]","1 of 56 reference works");
+        assert.deepEqual(await ids(),["grothendieck-tohoku"]);
+        await author.selectOption("Alexandre Grothendieck");
+        await discipline.selectOption("Physics");
+        await textIs(page,"[data-reference-count]","0 of 56 reference works");
+        assert.ok(await catalog.getByText("No matching works.",{exact:false}).isVisible());
+        await key(reset,"Enter");
+        await textIs(page,"[data-reference-count]","56 of 56 reference works");
+        await checkFocus(reset,"Reference catalog reset");
+        for (const sort of ["year","title"]) {
+          await order.selectOption(sort);
+          const expected = filterReferences(referenceLibrary,{...initialCatalogFilters,sort}).map(w=>w.id);
+          assert.deepEqual(await ids(),expected);
+        }
+        await key(reset,"Enter");
+        await textIs(page,"[data-reference-count]","56 of 56 reference works");
+        assert.deepEqual(await ids(),referenceLibrary.map(w=>w.id));
+        await input.focus();
+        await page.keyboard.press("Tab");
+        await checkFocus(author,"Reference author filter");
+        await fit(page);
+        await capture("reference-library-catalog",catalog.getByRole("group",{name:"Filter reference works"}),{frameStart:true});
+        assert.deepEqual(requests,[],"catalog filtering must not send queries or load external sources");
+      } finally { page.off("request",onRequest); }
     });
     await scenario("observation and mathematical projection parity", async (checkFocus, capture) => {
       await open(page, base, "/observatory/instruments");

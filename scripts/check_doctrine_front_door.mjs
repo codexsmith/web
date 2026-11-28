@@ -215,7 +215,12 @@ check(trust.lineageLimit.includes("not independent validation") && trust.aiIntro
 check(trust.example.limit.includes("does not establish a general classification theorem") && trust.example.domain && trust.example.procedure && trust.example.observation && trust.example.establishes,"public evidence card scope");
 check(equal(trust.publication.sources.map(s=>s.sourceUrl),["https://github.com/codexsmith/boundary-first-labs-public/blob/main/INTELLECTUAL_PROVENANCE.md","https://github.com/codexsmith/boundary-first-labs-public/blob/main/PUBLICATION_POLICY.md"]),"trust references use reviewed public policies");
 check(trust.product.body.includes("no public release or approved real-data intake") && trust.correction.links.some(x=>x.href==="/contact") && trust.correction.notice.includes("sensitive personal records"),"product and correction limits");
-check(content.trustLinks.length===9 && content.trustLinks.every(x=>x.href==="/evidence-and-trust" && x.context in content.doctrineContexts),"trust contextual entry routes");
+check(content.trustLinks.length===10 && content.trustLinks.every(x=>x.href==="/evidence-and-trust" && x.context in content.doctrineContexts),"trust contextual entry routes");
 const trustRenderer=read(`${root}/EvidenceTrustPage.tsx`);
 check(trustRenderer.includes('<DoctrineLinksSection context="evidence-and-trust" />') && !/<(?:form|iframe|embed|object|button|input|textarea|select)\b/.test(trustRenderer),"trust read-only renderer and closure");
 console.log("Pass 18 trust contracts passed.");
+
+// Separately admitted bibliographic reader; not the suspended original-research mine.
+check(admitted.has("/observatory/reference-library") && content.doctrineContexts["observatory/reference-library"], "reference library canonical route and contextual doctrines");
+check(observatoryPage.includes('data-reference-library-entry') && observatoryPage.includes('href="/observatory/reference-library"'), "separate reference-library entry preserves four exhibits");
+check(read(`src/components/institutional/ReferenceLibraryPage.tsx`).includes('<DoctrineLinksSection context="observatory/reference-library" />'), "reference reader closes with contextual doctrines");
