@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { suspendedPublicationRoutes } from "../src/lib/site-publication.ts";
 
 const root = process.cwd();
 const failures = [];
@@ -37,7 +38,15 @@ function canonicalRouteFromPage(file) {
 const v3PageFiles = walk(path.join(root, "src/app/v3"))
   .filter((file) => file.endsWith(path.sep + "page.tsx"))
   .filter((file) => !file.includes("["))
-  .filter((file) => routeFromPage(file) !== "/v3");
+  .filter((file) => routeFromPage(file) !== "/v3")
+  .filter((file) => {
+    if (!suspendedPublicationRoutes.includes(routeFromPage(file))) return true;
+    const source = fs.readFileSync(file, "utf8");
+    if (!source.includes("redirect(suspendedPublicationDestination)") || /PaperMineView|paperMineSnapshot/.test(source)) {
+      fail("Suspended page must be a redirect-only route: " + routeFromPage(file));
+    }
+    return false;
+  });
 const rootPageFile = path.join(root, "src/app/page.tsx");
 const publicPageFiles = [rootPageFile, ...v3PageFiles];
 

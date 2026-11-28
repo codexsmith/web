@@ -599,10 +599,10 @@ export const doctrineFrontDoor = {
           {
             "id": "paper-review",
             "title": "Scientific paper auditing and verification",
-            "body": "Scoped manuscript review: assumptions, dependencies, reproducibility, counterexamples and open obligations. A pilot inquiry, not peer review or certification.",
-            "label": "Explore paper audit pilots",
+            "body": "Developing a bounded approach to manuscript review, reproducibility and counterexamples. Not yet accepting audits, and not peer review or certification.",
+            "label": "Explore the proposed review model",
             "href": "/work-with-us/paper-auditing",
-            "status": "Pilot inquiry"
+            "status": "In development"
           }
         ]
       },
@@ -1139,13 +1139,13 @@ export const doctrineFrontDoor = {
     {
       "slug": "work-with-us/paper-auditing",
       "name": "Scientific Paper Auditing",
-      "eyebrow": "Commission work · Pilot inquiries",
+      "eyebrow": "Research service · In development",
       "tagline": "Make claims inspectable, reproducible and defensible.",
       "lead": "We are developing an independent, computationally assisted research review practice that traces claims to their definitions, assumptions, evidence and dependencies.",
-      "support": "Authors, laboratories, journals and research organizations can discuss a bounded review. This is a pilot offering, not a released automated service, peer review or accredited certification.",
-      "statusTitle": "Pilot review model",
-      "status": "Subject to fit and capacity, a selected preliminary check may be offered at no charge. A targeted or extended audit can be separately commissioned with explicit scope and fees. No turnaround, coverage or acceptance guarantee is implied.",
-      "offerHeading": "What a review can examine",
+      "support": "Authors, laboratories, journals and research organizations can discuss the proposed review model. This is not a released service, peer review or accredited certification. Audit intake is not open.",
+      "statusTitle": "Proposed review model",
+      "status": "Intake remains closed pending verification of the underlying framework and a separate service-readiness decision. The proposed model is a selected preliminary check at no charge, with optional extended work under an agreed scope and fee. No audit, turnaround or acceptance is promised.",
+      "offerHeading": "What a future review could examine",
       "offers": [
         {
           "title": "Mathematical and logical consistency",
@@ -1163,7 +1163,7 @@ export const doctrineFrontDoor = {
       "sections": [
         {
           "title": "Start with a precise claim",
-          "body": "Identify the manuscript version, a particular question or result, relevant dependencies and available evidence. Determine whether a meaningful check is feasible before promising a result. A paper is a compressed representation of a larger intellectual process. Make the structure of the argument visible by inventorying assumptions, intermediate constructions, dependencies and unresolved obligations. A computational reproducibility review may inventory source identity, inputs, environments, assumptions, execution findings and unresolved differences. Authors and computational scientists can ask for review of source inputs, environment, reproducibility, assumptions and dependencies; the evidence and limits of the particular review remain inspectable.",
+          "body": "Identify the manuscript version, a particular question or result, relevant dependencies and available evidence. Determine whether a meaningful check is feasible before promising a result. A paper is a compressed representation of a larger intellectual process. Make the structure of the argument visible by inventorying assumptions, intermediate constructions, dependencies and unresolved obligations. A computational reproducibility review may inventory source identity, inputs, environments, assumptions, execution findings and unresolved differences. A future review could address source inputs, environment, reproducibility, assumptions and dependencies; its evidence and limits must remain inspectable.",
           "anchorId": "reader-chapter-precise-claim"
         },
         {
@@ -1184,9 +1184,9 @@ export const doctrineFrontDoor = {
       ],
       "exampleTitle": "Illustrative audit",
       "example": "A computational paper reports a limiting result. A bounded review might inspect the discretization, reproduce an available small benchmark and test one stated assumption. Agreement at that benchmark does not establish convergence or the theorem; the report records both the observed result and what remains open.",
-      "ask": "Send a public manuscript URL or identifier, version and the specific question you want examined. For unpublished or restricted materials, first agree a secure exchange, permitted uses and confidentiality; do not submit sensitive files through an initial message.",
+      "ask": "For a non-confidential discussion about the proposed service, describe the kind of review you would find useful. Please do not submit manuscripts or restricted material: audit intake is not open.",
       "principle": "Verification earns confidence by making criticism possible.",
-      "subject": "Scientific paper audit pilot",
+      "subject": "Proposed scientific paper review model",
       "links": [
         {
           "label": "Explore the research",
@@ -1949,7 +1949,7 @@ export const doctrineFrontDoor = {
         "takeaway": "A useful diagnosis constrains the set of plausible repairs.",
         "links": [
           {
-            "label": "Discuss a scoped paper audit",
+            "label": "Explore the proposed audit model",
             "href": "/work-with-us/paper-auditing"
           },
           {
@@ -2311,7 +2311,7 @@ export const doctrineFrontDoor = {
           "id": "research",
           "audience": "Researchers, authors and independent reviewers",
           "question": "Can an argument or result be made more inspectable?",
-          "body": "Discuss a joint investigation, paper audit or reproducibility review; not a substitute for peer review.",
+          "body": "Explore the proposed audit and reproducibility review model, or discuss a joint investigation. Audit intake is not open.",
           "links": [
             {
               "href": "/work-with-us/paper-auditing",
@@ -2353,7 +2353,7 @@ export const doctrineFrontDoor = {
       },
       {
         "id": "paper",
-        "label": "Technical paper audit"
+        "label": "Paper review model inquiry"
       },
       {
         "id": "engineering",
