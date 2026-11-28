@@ -160,11 +160,17 @@ check(content.codexware.civicIntro.href === civicRoute && content.codexware.civi
 check(civic.status.includes("no public release") && civic.status.includes("no public release, approved real-data intake") && civic.status.includes("reviews remain outstanding"), "Civic Record release and intake limits");
 check(civic.cases.length === 3 && civic.caseNote.includes("Fictional intended-use") && civic.commitments.length === 4 && civic.boundaries.length === 3, "Civic Record examples and boundaries");
 check(civic.commitments[3].body.includes("without required AI, an external account, a subscription, payment or research participation"), "Civic Record independent free core requirement");
+check(content.codexware.lead.includes("computational platform") && content.codexware.support.includes("Codexware Civic is its first application"), "platform and first application remain distinct");
+check(equal(civic.workflow.steps.map(x=>x.title), ["Capture","My records","Prepare"]), "capture-first workflow and deferred use");
+check(civic.workflow.conceptLabel.includes("Not a released application") && civic.workflow.note.includes("No data entry, actual validation or transfer"), "editorial concept is explicitly fictional and non-operational");
+check(civic.commitments[1].body.includes("encrypted at rest") && civic.commitments[1].body.includes("reasoning inside the app") && civic.commitments[1].body.includes("end-to-end encrypted") && civic.commitments[1].body.includes("Choose your own transport") && civic.status.includes("not verified security guarantees"), "local processing, encrypted custody and optional transfer are requirements");
+check(civic.commitments[2].body.includes("source provenance") && civic.commitments[2].body.includes("explicit unresolved requirements"), "scoped evidence-backed form preparation");
 check(civic.boundaryHeading === "Documentation is not submission." && civic.boundaries[1].body.includes("does not autonomously"), "Civic Record non-execution boundary");
 check(read("src/app/v3/codexware/civic-record/page.tsx").includes('canonical: "/codexware/civic-record"'), "Civic Record canonical metadata");
 const civicRenderer = read(`${root}/CodexwareCivicRecordPage.tsx`);
 check(civicRenderer.includes('data-civic-status') && civicRenderer.includes('data-civic-case-limit') && civicRenderer.includes('context="codexware/civic-record"'), "Civic Record renders limitations and doctrines");
 check(!/<(?:form|iframe|embed|object|button|input|textarea|select)\b/.test(civicRenderer), "Civic Record reader must not intake records");
+check(civicRenderer.includes("data-civic-interface-concept") && civicRenderer.includes("c.workflow.steps.map") && civicRenderer.includes("c.workflow.note"), "Civic concept has a single source and visible scope note");
 check(equal(content.home.paths.map(x=>x.href), routes) && front.includes("data-home-entry-paths"), "homepage exposes exactly three entry cards");
 check(content.observatoryExhibits[1].cards.length === 7 && content.observatoryExhibits[1].cards.some(x=>x.title==="Representational Systematics"), "research directions remain curated");
 console.log("Pass 14 copy bank integration contracts passed.");

@@ -3,7 +3,7 @@ import { CodexwareIntroductionPage } from "@/components/institutional/DoctrineFr
 
 export const metadata: Metadata = {
   title: "Codexware",
-  description: "Putting institutional computational tools into individual hands. Application vision in development.",
+  description: "A developing computational platform from Boundary First Labs. Institutional tools in individual hands; Civic is its first intended application.",
   alternates: { canonical: "/codexware" },
 };
 

@@ -676,6 +676,13 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       assert.equal(await cases.locator("[data-civic-case]").count(),3);
       assert.ok(await page.locator("[data-civic-case-limit]").isVisible());
       assert.equal(await page.locator("[data-civic-case-limit]").textContent(),doctrineFrontDoor.civicRecord.caseNote);
+      const concept = page.locator('[data-civic-interface-concept]');
+      assert.deepEqual(await concept.locator('li h3').allTextContents(), doctrineFrontDoor.civicRecord.workflow.steps.map(x=>x.title));
+      assert.equal(await concept.locator('figcaption').textContent(), doctrineFrontDoor.civicRecord.workflow.note);
+      assert.ok(await concept.isVisible());
+      assert.equal(await concept.locator('button,form,input,textarea,select,iframe,embed,object').count(),0);
+      assert.ok((await page.locator('[data-civic-status]').textContent()).includes('not verified security guarantees'));
+      await fit(page);
       await fit(page);
     });
     await scenario("Observatory editorial economy and contextual identity", async (_checkFocus, capture) => {

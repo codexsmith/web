@@ -9,10 +9,10 @@ export const doctrineFrontDoor = {
     "paths": [
       {
         "title": "Codexware",
-        "tagline": "Computational tools",
-        "body": "Developing tools to preserve evidence, support human agency and navigate consequential systems.",
+        "tagline": "Computational platform",
+        "body": "Developing tools to preserve evidence, check requirements and prepare information for consequential use.",
         "href": "/codexware",
-        "label": "View the application vision"
+        "label": "Explore the platform"
       },
       {
         "title": "Observatory",
@@ -334,25 +334,25 @@ export const doctrineFrontDoor = {
   "codexware": {
     "slug": "codexware",
     "name": "Codexware",
-    "tagline": "Putting institutional computational tools into individual hands.",
-    "lead": "The intended tools help people understand requirements, preserve evidence and examine consequential decisions.",
-    "support": "Codexware is a developing application and governed deployment architecture. Reusable reasoning, verification and evidence components are composed within declared boundaries.",
+    "tagline": "Institutional tools in individual hands",
+    "lead": "Codexware is the Lab’s developing computational platform for preserving evidence, understanding requirements and preparing information for use.",
+    "support": "Codexware Civic is its first application. Shared research and verification capabilities are distilled into purpose-built tools, rather than requiring people to operate the research machinery.",
     "sections": [
       {
-        "title": "Because data is consequential.",
+        "title": "Because data is consequential",
         "body": "Useful computational tools preserve the evidence, assumptions and meaning needed by the next operation. Shared components can reduce repeated construction of that infrastructure."
       },
       {
-        "title": "Start with the people who need these tools.",
-        "body": "Help people check a form against stated requirements, organize evidence or prepare a proposed correction without submitting it. They should not have to wait for institutions to adopt the tools to benefit from them. These are design directions, not available services."
+        "title": "Start with the people who need these tools",
+        "body": "Capture information before a form or institutional request arises. When it is needed, prepare supported field values and their evidence for the person’s review. These are design directions, not available services."
       },
       {
-        "title": "Capability without captivity.",
+        "title": "Capability without captivity",
         "body": "Portability, interoperability, meaningful exit and human authorization are design requirements. Restricting execution authority need not restrict ownership of the work."
       },
       {
-        "title": "Research broadly. Deploy narrowly.",
-        "body": "Separate research machinery from deployment machinery. Each appliance receives only the capabilities needed for its declared purpose. Verify rigorously. Release selectively. Govern continuously."
+        "title": "Research broadly. Deploy narrowly",
+        "body": "Distill the general research into purpose-centered data stores and supported operations. Keep the application as simple as its requirements allow. Verify rigorously and release selectively."
       },
       {
         "title": "Represent only what the purpose requires",
@@ -364,7 +364,7 @@ export const doctrineFrontDoor = {
       }
     ],
     "principle": "Your information should remain yours. Your decisions remain your own.",
-    "status": "In development. This page describes intended capabilities and formal design and verification requirements, not a product release, availability promise, MCP integration, or claim of verified safeguards.",
+    "status": "In development. Codexware is a platform and Civic is its first intended application. This page describes design and verification requirements, not a product release, availability promise, MCP integration, or claim of verified safeguards.",
     "commitments": {
       "heading": "Computational capability. Human authority.",
       "intro": "Governance by construction begins with five design requirements for the proposed deployment boundary.",
@@ -434,12 +434,12 @@ export const doctrineFrontDoor = {
       "linkIntro": "Explore the research connecting financial records to material viability."
     },
     "civicIntro": {
-      "title": "Civic Record",
-      "tagline": "Your records. Your evidence. Your agency.",
-      "body": "A proposed local workspace to preserve originals, document events and organize selected evidence. Core utility is intended to be free at the MVP stage, without AI, an external account, subscription or research participation.",
+      "title": "Codexware Civic",
+      "tagline": "Capture when you can. Use it when you need it",
+      "body": "Keep your records independently of the forms you may later need to complete. The proposed Civic Record workspace is designed for local encrypted storage, on-device processing and source-linked form preparation. The initial core is intended to be free, without required AI, an external account or research participation.",
       "status": "Private prototype · Synthetic-data development · Not publicly available",
       "href": "/codexware/civic-record",
-      "label": "Explore Civic Record"
+      "label": "Explore Civic"
     }
   },
   "foundation": {
@@ -482,8 +482,8 @@ export const doctrineFrontDoor = {
     },
     "codexware": {
       "eyebrow": "Design foundations",
-      "title": "Three doctrines inform the application.",
-      "intro": "The systems we study, the way we govern computation and our goal of expanding what people can do shape the application's design requirements."
+      "title": "Three doctrines inform the platform",
+      "intro": "The systems we study, the way we govern computation and our goal of expanding what people can do shape the platform’s design requirements."
     },
     "observatory": {
       "eyebrow": "Institutional foundations",
@@ -552,8 +552,8 @@ export const doctrineFrontDoor = {
     },
     "codexware/civic-record": {
       "eyebrow": "Design foundations",
-      "title": "The doctrines behind Civic Record.",
-      "intro": "The proposed evidence workspace puts people in control of their own records. It is intended to put these institutional commitments into practice."
+      "title": "The doctrines behind Civic",
+      "intro": "Civic is the first intended application of Codexware. Its personal evidence workspace is designed to put these institutional commitments into practice."
     },
     "observatory/instruments": {
       "eyebrow": "Institutional foundations",
@@ -914,7 +914,7 @@ export const doctrineFrontDoor = {
         "href": "/digital-native-institution"
       },
       {
-        "label": "Explore Codexware’s application vision",
+        "label": "Explore Codexware",
         "href": "/codexware"
       },
       {
@@ -1197,7 +1197,7 @@ export const doctrineFrontDoor = {
           "href": "/observatory/research-architecture"
         },
         {
-          "label": "Codexware application vision",
+          "label": "Codexware platform",
           "href": "/codexware"
         }
       ]
@@ -1294,8 +1294,8 @@ export const doctrineFrontDoor = {
       ],
       "sections": [
         {
-          "title": "One institution, one developing application",
-          "body": "Boundary First Labs conducts fundamental and applied inquiry. Codexware is the intended application through which suitable capabilities can become accessible. We do not present the individual research instruments as separate launched products.",
+          "title": "One institution, one developing platform",
+          "body": "Boundary First Labs conducts fundamental and applied inquiry. Codexware is the intended platform through which suitable capabilities can become accessible, with Civic as its first intended application. We do not present individual research instruments as separate launched products.",
           "anchorId": "reader-chapter-institution-application"
         },
         {
@@ -1321,7 +1321,7 @@ export const doctrineFrontDoor = {
       "subject": "Funding or institutional support inquiry",
       "links": [
         {
-          "label": "Codexware application vision",
+          "label": "Codexware platform",
           "href": "/codexware"
         },
         {
@@ -1497,7 +1497,7 @@ export const doctrineFrontDoor = {
         },
         {
           "title": "Research made transferable",
-          "body": "A result should be accompanied by enough context for another qualified person to evaluate the relevant claim, within its disclosed scope. Selected methods, teaching examples and governed applications may translate research into useful capability. Codexware is the application direction in development, not a representation of unrestricted internal machinery. Formal verification can establish correctness relative to a declared logical system; explanatory reconstruction asks which constructions, assumptions and dependencies make the result intelligible. Neither substitutes for the other. A result should become teachable and reconstructable, not merely reproducible as a sequence of instructions. A failed conjecture or a counterexample can leave a better question, a useful test or a new instrument behind.",
+          "body": "A result should be accompanied by enough context for another qualified person to evaluate the relevant claim, within its disclosed scope. Selected methods, teaching examples and governed applications may translate research into useful capability. Codexware is the computational platform in development, not a representation of unrestricted internal machinery. Formal verification can establish correctness relative to a declared logical system; explanatory reconstruction asks which constructions, assumptions and dependencies make the result intelligible. Neither substitutes for the other. A result should become teachable and reconstructable, not merely reproducible as a sequence of instructions. A failed conjecture or a counterexample can leave a better question, a useful test or a new instrument behind.",
           "anchorId": "reader-chapter-transfer"
         }
       ],
@@ -1763,25 +1763,25 @@ export const doctrineFrontDoor = {
   },
   "civicRecord": {
     "slug": "codexware/civic-record",
-    "name": "Civic Record",
-    "eyebrow": "Codexware Civic · Private prototype",
-    "tagline": "Your records. Your evidence. Your agency.",
-    "lead": "Civic Record is being developed as a person-operated local evidence workspace to help you preserve and understand the records of your interactions with consequential systems. Your ability to demonstrate what happened should not depend entirely on an institution’s ability to remember it.",
-    "support": "When bills, notices, receipts and correspondence disagree, people are often left to reconstruct what happened. The workspace is intended to reduce that burden without claiming authority to decide the matter on their behalf. Development also investigates selected disclosure, portable recovery, and local storage protection. Independent security, accessibility, platform and real-data qualification remain necessary.",
-    "status": "Private synthetic-data development. Bounded development work exists; no public release, approved real-data intake, production-readiness claim or independently established human-benefit claim is made. Security, accessibility, usability, distribution and stewardship reviews remain outstanding. Please do not send sensitive records for testing.",
-    "commitmentsHeading": "Useful without surrendering control.",
+    "name": "Codexware Civic",
+    "eyebrow": "First application · In development",
+    "tagline": "Your records. Your evidence. Your agency",
+    "lead": "Capture information when, where and how you can. Keep it on your own devices, independently of the forms and institutional requests you may encounter later.",
+    "support": "Civic Record is the proposed personal workspace within Codexware Civic. When you need to complete a form, the application is intended to help prepare supported values with source evidence, validation results and unresolved requirements. The decision to use or share that information remains yours.",
+    "status": "Private synthetic-data development: no public release, approved real-data intake, production-readiness claim or independently established human-benefit claim is made. Local storage, local reasoning and end-to-end encrypted transfer are design requirements, not verified security guarantees. Security, accessibility, usability, distribution and stewardship reviews remain outstanding. Please do not send sensitive records for testing.",
+    "commitmentsHeading": "Useful without surrendering control",
     "commitments": [
       {
-        "title": "Preserve original records",
-        "body": "Keep the original evidence distinguishable from notes, summaries and subsequent corrections."
+        "title": "Capture and preserve originals",
+        "body": "Keep the original evidence distinguishable from notes, summaries and subsequent corrections. Organize source-linked events and preserve conflicting accounts rather than silently overwrite them."
       },
       {
-        "title": "Document events and disagreements",
-        "body": "Organize source-linked events and preserve conflicting accounts rather than silently overwrite them."
+        "title": "Private records and local reasoning",
+        "body": "The intended design keeps records encrypted at rest on your devices and reasoning inside the app. A phone can capture records; a computer handles supported ingestion and processing. Any supported device-to-device transfer must be end-to-end encrypted under the individual’s key control. Choose your own transport; a possible optional BFL relay would carry encrypted data, not perform reasoning or hold decryption keys."
       },
       {
-        "title": "Review and selectively export",
-        "body": "Prepare an inspectable record package for your own review. Selection and disclosure remain your decision."
+        "title": "Prepare, inspect and selectively export",
+        "body": "Prepare supported standards-compliant form values and portable evidence with source provenance, scoped assurance and explicit unresolved requirements. Review and choose what to copy or export. A readable disclosure leaves the vault’s protection; it is not an institutional acknowledgment."
       },
       {
         "title": "A free core for people's own use",
@@ -1793,7 +1793,7 @@ export const doctrineFrontDoor = {
       {
         "id": "billing",
         "title": "A billing discrepancy",
-        "body": "Imagine receiving a bill that seems inconsistent with a prior payment. Preserve the receipt, statement and correspondence; arrange the events and document the discrepancy. The tool need not decide who is right to help make the evidence intelligible. The worked fictional walkthrough in Instruments separates the reported payment from an actual finding of debt or closure."
+        "body": "Imagine receiving a form asking for a payment amount. A preserved receipt may support a value, while a matching bank transaction or settlement remains unestablished. Inspect the source and identify what is missing before using the value. The fictional walkthrough in Instruments separates reported payment from a finding of debt or closure."
       },
       {
         "id": "conflict",
@@ -1836,7 +1836,36 @@ export const doctrineFrontDoor = {
         "label": "Discuss a public-service collaboration",
         "href": "/work-with-us/public-service"
       }
-    ]
+    ],
+    "workflow": {
+      "heading": "Capture now, prepare when you need it",
+      "intro": "A purpose-built application, not a general research workbench. The intended workflow separates collecting information from using it.",
+      "conceptLabel": "Interface concept · Fictional records · Not a released application",
+      "steps": [
+        {
+          "title": "Capture",
+          "detail": "Phone or computer",
+          "body": "Save a note, photo or document without choosing a form or institution first.",
+          "example": "Payment receipt",
+          "status": "Original captured"
+        },
+        {
+          "title": "My records",
+          "detail": "Your devices",
+          "body": "Transfer by a method you choose. Ingest and organize supported records on your computer.",
+          "example": "Receipt and statement",
+          "status": "Sources retained"
+        },
+        {
+          "title": "Prepare",
+          "detail": "On-device reasoning",
+          "body": "Check supported form requirements, inspect the evidence and review missing or conflicting values.",
+          "example": "Payment amount",
+          "status": "$45.20 · Source linked; settlement unverified"
+        }
+      ],
+      "note": "Illustrative concept only. No data entry, actual validation or transfer is performed here. Standards conformance and assurance must be verified for each supported adapter and output."
+    }
   },
   "instruments": {
     "slug": "observatory/instruments",
@@ -2170,7 +2199,7 @@ export const doctrineFrontDoor = {
         {
           "id": "individuals",
           "audience": "Individuals and advocates",
-          "question": "My records disagree with an institution’s records.",
+          "question": "My records disagree with an institution’s records",
           "body": "Keep evidence and conflicting records under people's control; no legal representation or adjudication.",
           "links": [
             {

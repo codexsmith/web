@@ -4,6 +4,7 @@ import { ReaderSectionNav } from "./ReaderSectionNav";
 import { doctrineClosingSectionEntries, DoctrineLinksSection, InstrumentCollectionLink } from "./DoctrineFrontDoor";
 import { doctrineFrontDoor as content } from "./content/doctrineFrontDoor";
 import styles from "./styles/DoctrineFrontDoor.module.css";
+import civicStyles from "./styles/CivicPreview.module.css";
 
 export function CodexwareCivicRecordPage() {
   const c = content.civicRecord;
@@ -15,8 +16,32 @@ export function CodexwareCivicRecordPage() {
           <h1>{c.name}</h1><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>{c.eyebrow}</p><p className={styles.tagline}>{c.tagline}</p></div>
           <p className={styles.lead}>{c.lead}</p><p className={styles.support}>{c.support}</p>
         </section>
-        <ReaderSectionNav sections={[{ id: "reader-civic-status", label: "Development status" }, { id: "reader-civic-commitments", label: "Design commitments" }, { id: "reader-civic-cases", label: "Intended uses" }, { id: "reader-civic-boundary", label: "Boundaries" }, { id: "reader-explore", label: "Explore the work" }, { id: "reader-instruments", label: "Instruments" }, ...doctrineClosingSectionEntries("codexware/civic-record")]} />
+        <ReaderSectionNav sections={[{ id: "reader-civic-status", label: "Development status" }, { id: "reader-civic-workflow", label: "How it works" }, { id: "reader-civic-commitments", label: "Design commitments" }, { id: "reader-civic-cases", label: "Intended uses" }, { id: "reader-civic-boundary", label: "Boundaries" }, { id: "reader-explore", label: "Explore the work" }, { id: "reader-instruments", label: "Instruments" }, ...doctrineClosingSectionEntries("codexware/civic-record")]} />
         <section className={styles.section} data-civic-status><p id="reader-civic-status" tabIndex={-1} data-reader-section-target className={styles.eyebrow}>Development status</p><p className={styles.sectionIntro}>{c.status}</p></section>
+        <section className={styles.section} data-civic-workflow>
+          <h2 id="reader-civic-workflow" tabIndex={-1} data-reader-section-target>{c.workflow.heading}</h2>
+          <p className={styles.sectionIntro}>{c.workflow.intro}</p>
+          <figure className={civicStyles.preview} data-civic-interface-concept>
+            <div className={civicStyles.mast}>
+              <strong>Codexware Civic</strong>
+              <span>{c.workflow.conceptLabel}</span>
+            </div>
+            <ol className={civicStyles.steps}>
+              {c.workflow.steps.map((step, i) => (
+                <li className={civicStyles.step} data-civic-workflow-step={i+1} key={step.title}>
+                  <span className={civicStyles.kicker}>0{i+1} / {step.detail}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.body}</p>
+                  <div className={civicStyles.record}>
+                    <strong>{step.example}</strong>
+                    <span>{step.status}</span>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <figcaption className={civicStyles.caption}>{c.workflow.note}</figcaption>
+          </figure>
+        </section>
         <section className={styles.section} data-civic-commitments><h2 id="reader-civic-commitments" tabIndex={-1} data-reader-section-target>{c.commitmentsHeading}</h2><div className={styles.pathGrid} data-reader-collection="reference">{c.commitments.map(x=><article className={styles.pathCard} key={x.title}><h3>{x.title}</h3><p>{x.body}</p></article>)}</div></section>
         <section className={styles.section} data-civic-cases><h2 id="reader-civic-cases" tabIndex={-1} data-reader-section-target>{c.casesHeading}</h2><div className={styles.pathGrid} data-reader-collection="cases">{c.cases.map(x=><article className={styles.pathCard} data-civic-case={x.id} key={x.id}><p className={styles.workStatus}>Illustrative intended use</p><h3>{x.title}</h3><p>{x.body}</p></article>)}</div><p className={styles.smallPrint} data-civic-case-limit>{c.caseNote}</p></section>
         <section className={styles.section} data-civic-boundary><h2 id="reader-civic-boundary" tabIndex={-1} data-reader-section-target>{c.boundaryHeading}</h2><div className={styles.pathGrid} data-reader-collection="reference">{c.boundaries.map(x=><article className={styles.pathCard} key={x.title}><h3>{x.title}</h3><p>{x.body}</p></article>)}</div></section>

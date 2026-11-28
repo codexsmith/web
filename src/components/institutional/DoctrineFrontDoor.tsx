@@ -226,14 +226,14 @@ export function CodexwareIntroductionPage() {
         <section className={`${styles.hero} ${styles.doctrineHero}`} data-institutional-hero>
           <Link className={styles.back} href="/">← Boundary First Labs</Link>
           <h1>{c.name}</h1>
-          <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Application vision · In development</p><p className={styles.tagline}>{c.tagline}</p></div>
+          <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Platform · In development</p><p className={styles.tagline}>{c.tagline}</p></div>
           <p className={styles.lead}>{c.lead}</p><p className={styles.support}>{c.support}</p>
           <ReaderMastheadField kind="operation" />
         </section>
-        <ReaderSectionNav sections={[{ id: "audience-codexware", label: "Find your starting point" }, { id: "reader-civic-record", label: "Civic Record" }, { id: "reader-intended-uses", label: "Intended uses" }, { id: "reader-application-design", label: "Design & development status" }, { id: "reader-commitments", label: "Governance requirements" }, { id: "reader-instruments", label: "Instruments" }, ...doctrineClosingSectionEntries("codexware")]} />
+        <ReaderSectionNav sections={[{ id: "audience-codexware", label: "Find your starting point" }, { id: "reader-civic-record", label: "Civic" }, { id: "reader-intended-uses", label: "Intended uses" }, { id: "reader-application-design", label: "Design & development status" }, { id: "reader-commitments", label: "Governance requirements" }, { id: "reader-instruments", label: "Instruments" }, ...doctrineClosingSectionEntries("codexware")]} />
         <AudiencePathways context="codexware" />
         <section className={`${styles.section} ${styles.callout}`} data-civic-record-entry>
-          <div><h2 id="reader-civic-record" tabIndex={-1} data-reader-section-target>{c.civicIntro.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Codexware Civic</p><p className={styles.tagline}>{c.civicIntro.tagline}</p></div></div>
+          <div><h2 id="reader-civic-record" tabIndex={-1} data-reader-section-target>{c.civicIntro.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>First application</p><p className={styles.tagline}>{c.civicIntro.tagline}</p></div></div>
           <div><p className={styles.calloutText}>{c.civicIntro.body}</p><p className={styles.status}>{c.civicIntro.status}</p><Link className={styles.textLink} href={c.civicIntro.href}>{c.civicIntro.label} →</Link></div>
         </section>
         <section className={styles.section} data-codexware-examples>
@@ -243,7 +243,7 @@ export function CodexwareIntroductionPage() {
           <p className={styles.sectionIntro}>{c.examples.linkIntro}</p><Link className={styles.textLink} href={c.examples.href}>{c.examples.label} →</Link>
         </section>
         <div className={styles.reading}>
-          <details className={styles.readerDetails} data-reader-detail="codexware-design"><summary id="reader-application-design" data-reader-section-target>Explore application design and interoperability</summary><ReadingSections sections={c.sections} /></details>
+          <details className={styles.readerDetails} data-reader-detail="codexware-design"><summary id="reader-application-design" data-reader-section-target>Explore platform design and interoperability</summary><ReadingSections sections={c.sections} /></details>
           <aside className={styles.example} data-codexware-status><h2 id="reader-development-status" tabIndex={-1} data-reader-section-target>Development status</h2><p>{c.status}</p></aside>
         </div>
         <section className={styles.section} data-codexware-commitments>

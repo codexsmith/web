@@ -81,6 +81,9 @@ export function closingIssues({ route, context, expectedLinks, navRoutes, navLab
   if (route === "/codexware/civic-record") {
     if (!main?.querySelector('[data-civic-status]')?.textContent.includes('no public release, approved real-data intake') || !main?.querySelector('[data-civic-case-limit]')?.textContent.includes('Fictional intended-use')) issues.push("Civic Record release and example limits required");
     if (main?.querySelectorAll('[data-civic-case]').length !== 3 || main?.querySelectorAll('[data-civic-commitments] article').length !== 4 || main?.querySelectorAll('[data-civic-boundary] article').length !== 3) issues.push("Civic Record content incomplete");
+    const concept = main?.querySelector('[data-civic-interface-concept]');
+    if (!concept || !same(Array.from(concept.querySelectorAll('li h3')).map(h=>h.textContent.trim()), ['Capture','My records','Prepare']) || !concept.textContent.includes('Not a released application') || !concept.querySelector('figcaption')?.textContent.includes('No data entry, actual validation or transfer')) issues.push("Civic capture-first concept must remain explicitly fictional and editorial");
+    if (!main?.querySelector('[data-civic-status]')?.textContent.includes('not verified security guarantees') || !main?.querySelector('[data-civic-commitments]')?.textContent.includes('end-to-end encrypted')) issues.push("Civic privacy requirements and verification limits missing");
     if (!main?.querySelector('[data-civic-boundary]')?.textContent.includes('Documentation is not submission.') || !main?.querySelector('a[href="/codexware"]') || main?.querySelector('form,button,input,select,textarea,iframe,embed,object')) issues.push("Civic Record boundary, return and editorial-only surface required");
   }
   if (route === "/codexware/economic-maintenance") {
