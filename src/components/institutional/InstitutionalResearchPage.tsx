@@ -73,9 +73,6 @@ export function InstitutionalResearchPage() {
               <Link href="/publications">
                 Explore Publications <span aria-hidden="true">→</span>
               </Link>
-              <Link href="/research/paper-mine">
-                Open Paper Mine <span aria-hidden="true">→</span>
-              </Link>
             </div>
           </aside>
         </section>

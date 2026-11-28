@@ -1144,10 +1144,14 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         const copy = page.locator("[data-draft-copy]");
         assert.ok(await copy.isDisabled());
         assert.equal(await output.inputValue(), "");
-        await page.locator("[data-draft-category]").selectOption("paper");
+        const category = page.locator("[data-draft-category]");
+        await category.selectOption("paper");
+        assert.equal(await category.locator("option:checked").textContent(), "Paper review model inquiry",
+          "paper inquiry must describe the proposed review model rather than active audit intake");
         await message.fill(marker);
         await page.waitForFunction(value => document.querySelector("[data-draft-output]")?.value.includes(value), marker);
-        assert.ok((await output.inputValue()).includes("Technical paper audit"));
+        assert.equal(await output.inputValue(), "Subject: Boundary First Labs — Paper review model inquiry\n\nHello Boundary First Labs,\n\n" + marker + "\n",
+          "local draft must retain the selected inquiry-only category and the exact synthetic message");
         assert.ok(await copy.isEnabled());
         assert.equal(await output.getAttribute("readonly"), "");
         const prepared = await output.inputValue();
@@ -1159,7 +1163,7 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         await context.grantPermissions(["clipboard-read", "clipboard-write"], {origin: base});
         await key(copy, "Enter");
         await textIs(page, "[data-draft-status]", "Draft copied. Nothing was sent.");
-        assert.ok((await page.evaluate(() => navigator.clipboard.readText())).includes(marker));
+        assert.equal(await page.evaluate(() => navigator.clipboard.readText()), prepared, "explicit copy must preserve the entire prepared draft");
         // Avoid leaving synthetic witness text in the shared CI clipboard.
         await page.evaluate(() => navigator.clipboard.writeText(""));
         await key(page.locator("[data-draft-clear]"), "Enter");

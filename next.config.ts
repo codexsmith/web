@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { institutionalPublicRoutes, institutionalReferenceRoutes } from "./src/lib/site-release";
+import { suspendedPublicationRoutes, suspendedPublicationDestination } from "./src/lib/site-publication";
 
 const institutionalChildRoutes = institutionalPublicRoutes.filter(
   (route) => route !== "/",
@@ -30,6 +31,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/v3", destination: "/", permanent: true },
+      ...suspendedPublicationRoutes.map((source) => ({
+        source,
+        destination: suspendedPublicationDestination,
+        permanent: false,
+      })),
       { source: "/about/the-lab", destination: "/about", permanent: true },
       { source: "/about/provenance", destination: "/lab-through-time", permanent: true },
       { source: "/about/contact", destination: "/contact", permanent: true },

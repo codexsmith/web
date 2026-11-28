@@ -63,7 +63,7 @@ const work = content.workWithUs;
 check(equal(work.groups.map(g => g.id), ["commission", "collaborate", "support", "participate"]), "Work With Us exposes all four participation groups in order");
 check(equal(work.groups.flatMap(g => g.cards.map(c => c.id)), ["systems", "governance-review", "paper-review", "research", "public-service", "partnerships", "education", "funding", "open-lab", "media"]), "Work With Us exposes all ten engagement paths");
 check(work.groups.flatMap(g => g.cards).every(c => c.status && c.label && c.href), "each engagement path declares status and destination");
-check(work.groups.flatMap(g => g.cards).find(c => c.id === "paper-review")?.status === "Pilot inquiry", "paper auditing is explicitly a pilot inquiry");
+check(work.groups.flatMap(g => g.cards).find(c => c.id === "paper-review")?.status === "In development", "paper auditing remains in development");
 check(equal(work.know.cards.map(c => c.id), ["founder", "method", "independence", "principles"]), "institutional context links are complete");
 check(work.engagement.steps.length === 4 && work.engagement.outputs && work.engagement.limits, "engagement stages, outputs and limits are explicit");
 check(work.contact.href === "/contact" && work.contact.privacy, "contact uses admitted route and safe initial inquiry guidance");
@@ -93,7 +93,7 @@ for (const guide of guides) {
 const cardDestinations = {"systems": "/work-with-us/professional-services", "governance-review": "/work-with-us/professional-services", "paper-review": "/work-with-us/paper-auditing", "public-service": "/work-with-us/public-service", "funding": "/work-with-us/funding", "independence": "/work-with-us/funding"};
 const allCards = [...work.groups.flatMap(g=>g.cards), ...work.know.cards];
 for (const [id, href] of Object.entries(cardDestinations)) check(allCards.find(c => c.id === id)?.href === href, `canonical engagement guide link: ${id}`);
-check(guides[1].status.includes("no charge") && guides[1].support.includes("not a released") && guides[1].sections.some(s=>s.body.includes("not withheld")), "paper audit pilot scope and independence");
+check(guides[1].status.includes("Intake remains closed pending verification") && guides[1].status.includes("no charge") && guides[1].support.includes("not a released") && guides[1].ask.includes("audit intake is not open") && guides[1].sections.some(s=>s.body.includes("not withheld")), "paper audit model, activation boundary and independence");
 check(guides[3].status.includes("No financing round") && guides[3].sections.some(s=>s.body.includes("not an operational or perpetual pricing guarantee")), "funding inquiry and product claim ceiling");
 const guideBody = front.split("export function EngagementGuidePage(")[1] ?? "";
 check(guideBody.includes('data-engagement-guide={slug}') && guideBody.includes('href="/work-with-us"') && guideBody.includes('href="/contact"'), "guide renderer, return link and contact");

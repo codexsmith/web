@@ -30,3 +30,11 @@ export const institutionalDiscoveryRoutes = institutionalPublicationEntries.map(
 
 // Ownership is editorial, not a runtime dependency or an exclusivity rule for links.
 export const supportingPublicationEntries = institutionalPublicationEntries.filter(entry => entry.tier === "supporting");
+
+// This route identity is reserved for a future, separately approved reference edition.
+// A suspended edition is neither a discoverable reader nor a retained reference page.
+export const suspendedPublicationRoutes = [
+  "/research/paper-mine",
+  "/v3/research/paper-mine",
+] as const;
+export const suspendedPublicationDestination = "/observatory";

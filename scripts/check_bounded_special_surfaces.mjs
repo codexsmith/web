@@ -17,9 +17,9 @@ const css = read("src/app/p9-bounded-special-surfaces.css");
 const layout = read("src/app/layout.tsx");
 
 expect(
-  paperMineRoute.includes("InstitutionalInstrumentShell") &&
-    paperMineRoute.includes('canonical: "/research/paper-mine"'),
-  "Paper Mine must render inside the institutional instrument shell with its canonical route.",
+  paperMineRoute.includes("redirect(suspendedPublicationDestination)") &&
+    !/PaperMineView|paperMineSnapshot|InstitutionalInstrumentShell/.test(paperMineRoute),
+  "Suspended Paper Mine must redirect without importing the retained instrument.",
 );
 expect(
   timelineRoute.includes("InstitutionalInstrumentShell") &&
@@ -37,8 +37,8 @@ expect(
   "Institutional instruments must retain skip navigation and a stable main landmark.",
 );
 expect(
-  css.includes('a[href="/research/paper-mine"]') && css.includes('a[href="/about/provenance/timeline"]'),
-  "Paper Mine and founder timeline entry cards must both receive featured placement.",
+  css.includes('a[href="/about/provenance/timeline"]'),
+  "The founder timeline entry card must retain featured placement.",
 );
 expect(
   css.includes("display: contents") && css.includes("order: 1") && css.includes("order: 2"),

@@ -1126,12 +1126,6 @@ export const nodes: ContentNode[] = [
         eyebrow: "Nearest operational bridge",
         summary: "Representation, state, admissible transitions, invariants, and execution made explicit.",
       },
-      {
-        label: "Paper Mine",
-        href: "/research/paper-mine",
-        eyebrow: "Publication workbench",
-        summary: "A controlled field for candidate papers, evidence obligations, readiness, and promotion state.",
-      },
     ],
     inspection: [
       {
