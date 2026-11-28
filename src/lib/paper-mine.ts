@@ -45,7 +45,6 @@ export type PaperMineFrontierItem = {
   measures: string[];
   failure_outcomes: string[];
   claim_ceiling: string;
-  local_artifacts: string[];
 };
 
 type PaperMinePaperCore = {
@@ -67,7 +66,6 @@ type PaperMinePaperCore = {
   risk: string | null;
   control_rank: number | null;
   program: string | null;
-  source_paths: string[];
   aliases: string[];
 };
 
@@ -148,36 +146,44 @@ export type PaperMineSnapshot = {
   papers: PaperMinePaper[];
 };
 
-type CompactPaper = Omit<PaperMinePaperCore, "record_class" | "origins" | "source_paths" | "aliases" | "lane"> & {
+type CompactPaper = Omit<PaperMinePaperCore, "record_class" | "origins" | "aliases" | "lane"> & {
   lane?: string | null;
   origins?: string[];
-  source_paths?: string[];
-  extra_source_paths?: string[];
   aliases?: string[];
 };
 
-const CONTROLLED_PROVENANCE = "organized_library_curated/01_Daily_Operations/publication_graph/PUBLICATION_GRAPH.json";
-
-function hydrateControlled(paper: CompactPaper): PaperMinePaperCore {
+// Public projections enumerate the permitted fields; new source fields do not
+// become client payload merely because they are present in a catalog input.
+function projectPaperCore(paper: CompactPaper, recordClass: PaperMineRecordClass): PaperMinePaperCore {
   return {
-    ...paper,
-    record_class: "controlled_publication",
-    origins: paper.origins ?? ["publication_graph"],
+    id: paper.id,
+    title: paper.title,
+    record_class: recordClass,
+    origins: paper.origins ?? (recordClass === "controlled_publication" ? ["publication_graph"] : []),
+    discipline: paper.discipline,
+    field_group: paper.field_group,
+    domain: paper.domain,
     lane: paper.lane ?? null,
-    source_paths: [CONTROLLED_PROVENANCE, ...(paper.extra_source_paths ?? [])],
+    stage: paper.stage,
+    readiness_hint: paper.readiness_hint,
+    recommended_disposition: paper.recommended_disposition,
+    artifact_state: paper.artifact_state,
+    claim_ceiling: paper.claim_ceiling,
+    prior_art_requirement: paper.prior_art_requirement,
+    evidence_requirement: paper.evidence_requirement,
+    risk: paper.risk,
+    control_rank: paper.control_rank,
+    program: paper.program,
     aliases: paper.aliases ?? [],
   };
 }
 
+function hydrateControlled(paper: CompactPaper): PaperMinePaperCore {
+  return projectPaperCore(paper, "controlled_publication");
+}
+
 function hydrateMined(paper: CompactPaper): PaperMinePaperCore {
-  return {
-    ...paper,
-    record_class: "mined_candidate",
-    origins: paper.origins ?? [],
-    lane: paper.lane ?? null,
-    source_paths: paper.source_paths ?? [],
-    aliases: paper.aliases ?? [],
-  };
+  return projectPaperCore(paper, "mined_candidate");
 }
 
 const controlled = [
@@ -257,8 +263,69 @@ const papers = paperCores.map((paper): PaperMinePaper => {
 });
 
 export const paperMineSnapshot: PaperMineSnapshot = {
-  ...(meta as Omit<PaperMineSnapshot, "papers" | "summary_catalog">),
-  summary_catalog: summaryMeta as PaperMineSummaryCatalogMeta,
+  schema_version: meta.schema_version,
+  generated_on: meta.generated_on,
+  source_revision: meta.source_revision,
+  source_content_sha256: meta.source_content_sha256,
+  authority: {
+    scope: meta.authority.scope,
+    publication_promotion: meta.authority.publication_promotion,
+    scientific_authority: meta.authority.scientific_authority,
+    queue_insertion: meta.authority.queue_insertion,
+    human_gate_required: meta.authority.human_gate_required,
+    negative_results_are_valid: meta.authority.negative_results_are_valid,
+    private_lab_remains_authoritative: meta.authority.private_lab_remains_authoritative,
+  },
+  summary: {
+    raw_source_record_count: meta.summary.raw_source_record_count,
+    canonical_paper_count: meta.summary.canonical_paper_count,
+    controlled_publication_count: meta.summary.controlled_publication_count,
+    mined_candidate_count: meta.summary.mined_candidate_count,
+    frontier_count: meta.summary.frontier_count,
+    alias_mapping_count: meta.summary.alias_mapping_count,
+    excluded_record_count: meta.summary.excluded_record_count,
+    relation_count: meta.summary.relation_count,
+    counts_by_origin: meta.summary.counts_by_origin,
+    counts_by_discipline: meta.summary.counts_by_discipline,
+    counts_by_stage: meta.summary.counts_by_stage,
+    counts_by_record_class: meta.summary.counts_by_record_class,
+  },
+  summary_catalog: {
+    generated_on: summaryMeta.generated_on,
+    lab_merge_revision: summaryMeta.lab_merge_revision,
+    source_projection_sha256: summaryMeta.source_projection_sha256,
+    source_summary_sha256: summaryMeta.source_summary_sha256,
+    paper_count: summaryMeta.paper_count,
+    source_reading_priority_count: summaryMeta.source_reading_priority_count,
+    method: summaryMeta.method,
+    public_projection_note: summaryMeta.public_projection_note,
+    abstract_equivalence: summaryMeta.abstract_equivalence,
+  },
+  frontier: meta.frontier.map((item) => ({
+    rank: item.rank,
+    candidate_id: item.candidate_id,
+    source_candidate_id: item.source_candidate_id,
+    paperization_state: item.paperization_state,
+    question: item.question,
+    baselines: item.baselines,
+    measures: item.measures,
+    failure_outcomes: item.failure_outcomes,
+    claim_ceiling: item.claim_ceiling,
+  })),
+  aliases: meta.aliases.map((item) => ({
+    source_id: item.source_id,
+    canonical_id: item.canonical_id,
+    relation: item.relation,
+    confidence: item.confidence,
+    reason: item.reason,
+  })),
+  excluded_records: meta.excluded_records.map((item) => ({
+    source_id: item.source_id,
+    title: item.title,
+    origin: item.origin,
+    reason: item.reason,
+    related_controlled_ids: item.related_controlled_ids,
+  })),
   papers,
 };
 

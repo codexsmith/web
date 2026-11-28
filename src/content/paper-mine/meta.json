@@ -74,15 +74,7 @@
         "typed transitions fail to improve comprehension",
         "benefits appear only for a narrow graph/task class"
       ],
-      "claim_ceiling": "bounded HCI result plus formal interaction model; no general superiority claim",
-      "local_artifacts": [
-        "formal interaction contract",
-        "prototype with at least two semantic resolutions",
-        "baseline prototype(s)",
-        "pre-registered or fixed task protocol",
-        "analysis notebook",
-        "negative-result statement"
-      ]
+      "claim_ceiling": "bounded HCI result plus formal interaction model; no general superiority claim"
     },
     {
       "rank": 2,
@@ -110,15 +102,7 @@
         "DFS alone captures the useful effect",
         "BFS pattern recurrence increases false equivalence"
       ],
-      "claim_ceiling": "testable workflow contribution; no superiority claim before controlled benchmark",
-      "local_artifacts": [
-        "fixed corpus benchmark",
-        "workflow specifications",
-        "machine-readable provenance ledger",
-        "scoring rubric",
-        "ablation conditions",
-        "failure corpus"
-      ]
+      "claim_ceiling": "testable workflow contribution; no superiority claim before controlled benchmark"
     },
     {
       "rank": 3,
@@ -145,8 +129,7 @@
         "users ignore partiality indicators",
         "benefits depend on domain expertise"
       ],
-      "claim_ceiling": "bounded transparency/usability tradeoff result",
-      "local_artifacts": []
+      "claim_ceiling": "bounded transparency/usability tradeoff result"
     },
     {
       "rank": 4,
@@ -172,8 +155,7 @@
         "relation labels alone explain the effect",
         "benefits disappear at realistic graph scale"
       ],
-      "claim_ceiling": "empirical relation-comprehension result for specified graph/task conditions",
-      "local_artifacts": []
+      "claim_ceiling": "empirical relation-comprehension result for specified graph/task conditions"
     },
     {
       "rank": 5,
@@ -199,8 +181,7 @@
         "benefit appears only for unfamiliar domains",
         "reversibility is not used in practice"
       ],
-      "claim_ceiling": "bounded navigation/orientation result",
-      "local_artifacts": []
+      "claim_ceiling": "bounded navigation/orientation result"
     },
     {
       "rank": 6,
@@ -226,8 +207,7 @@
         "categories are not reliably distinguishable in cases",
         "state-space framing adds no diagnostic value"
       ],
-      "claim_ceiling": "philosophical synthesis and defect taxonomy unless a stronger novelty case survives prior-art review",
-      "local_artifacts": []
+      "claim_ceiling": "philosophical synthesis and defect taxonomy unless a stronger novelty case survives prior-art review"
     }
   ],
   "aliases": [

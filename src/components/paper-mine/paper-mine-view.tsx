@@ -59,11 +59,6 @@ function humanize(value: string) {
   return value.replace(/_/g, " ").replace(/\b\w/g, (character) => character.toUpperCase());
 }
 
-function compactPath(path: string) {
-  const parts = path.split("/");
-  return parts.length > 5 ? `…/${parts.slice(-5).join("/")}` : path;
-}
-
 function corpusLabel(paper: PaperMinePaper) {
   return paper.record_class === "controlled_publication" ? "Controlled publication record" : "Mined candidate";
 }
@@ -111,7 +106,6 @@ function paperSearchText(paper: PaperMinePaper, frontier?: PaperMineFrontierItem
     frontier?.question,
     ...(paper.origins ?? []),
     ...(paper.aliases ?? []),
-    ...(paper.source_paths ?? []),
   ]
     .filter(Boolean)
     .join(" ")
@@ -305,10 +299,10 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
   const displayedPapers = displayedGrouped.flatMap(([, papers]) => papers);
   const hasMorePaperCards = displayedPaperCount < visible.length;
 
-  const sourceCounts = useMemo(() => {
+  const originCounts = useMemo(() => {
     const counts = new Map<string, number>();
     visible.forEach((paper) => {
-      paper.source_paths.forEach((path) => counts.set(path, (counts.get(path) ?? 0) + 1));
+      new Set(paper.origins).forEach((origin) => counts.set(origin, (counts.get(origin) ?? 0) + 1));
     });
     return [...counts.entries()].sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]));
   }, [visible]);
@@ -580,15 +574,15 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
           <section className={styles.panel}>
             <header>
               <div><span>Source context</span><h2>Where these records came from</h2></div>
-              <p>These paths identify internal Lab source records used to build the snapshot. They are shown for provenance, not as public document links.</p>
+              <p>These registry origins describe the public catalog records. Canonical source locations remain with the Lab.</p>
             </header>
             <div className={styles.sourceGrid}>
-              {sourceCounts.length ? sourceCounts.map(([path, count]) => (
-                <article key={path} title={path}>
-                  <strong>{compactPath(path)}</strong>
+              {originCounts.length ? originCounts.map(([origin, count]) => (
+                <article key={origin}>
+                  <strong>{humanize(origin)}</strong>
                   <span>{count} paper reference{count === 1 ? "" : "s"}</span>
                 </article>
-              )) : <div className={styles.empty}>No provenance reservoirs are visible.</div>}
+              )) : <div className={styles.empty}>No registry origins are visible.</div>}
             </div>
           </section>
         </div>
@@ -640,7 +634,7 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
                   <section><h3>Failure / subsumption</h3><ul>{selectedFrontier.failure_outcomes.map((item) => <li key={item}>{item}</li>)}</ul></section>
                 </>
               ) : null}
-              <section><h3>Private Lab provenance</h3><ul>{selected.source_paths.map((path) => <li key={path}><code>{path}</code></li>)}</ul></section>
+              <section><h3>Provenance reference</h3><p><code>{selected.id}</code></p><p>Canonical source locations are not part of this public catalog.</p></section>
             </div>
           ) : (
             <p className={styles.detailEmpty}>Select a paper node or card to inspect its catalog summary, canonical identity, control state, claim ceiling, evidence contract, and provenance.</p>
