@@ -68,7 +68,7 @@ export const doctrineFrontDoor = {
           "anchorId": "reader-chapter-constructive-disruption"
         },
         {
-          "title": "Distinguish necessity from inherited constraint.",
+          "title": "Distinguish necessity from inherited constraint",
           "body": "An existing implementation is not a law of nature. The absence of a known alternative does not establish that none exists; the desire for an alternative does not establish its feasibility. Identify physical, mathematical, legal, organizational and resource constraints at their proper scopes. Investigate admissible alternatives and preserve the evidence when they fail. Demonstrated impossibility is earned closure, not a failed research outcome.",
           "anchorId": "reader-chapter-necessity"
         },
@@ -243,12 +243,12 @@ export const doctrineFrontDoor = {
           "anchorId": "reader-chapter-mastery"
         },
         {
-          "title": "I am not the one. I am one.",
+          "title": "I am not the one — I am one",
           "body": "The capacity to perceive, distinguish, reason, construct and revise is not the exclusive property of a founder, profession or institution. People have different circumstances, resources, knowledge, abilities and opportunities. Respecting their agency does not require pretending those differences do not exist. Useful systems should help people pursue their own work and goals, not reduce them to the roles they hold.",
           "anchorId": "reader-chapter-one-among-many"
         },
         {
-          "title": "People are more than their records.",
+          "title": "People are more than their records",
           "body": "No system can fully represent a person, and responsible assistance does not require it to. Use only the information relevant to a legitimate, authorized purpose; keep it grounded in evidence, open to correction and limited to that purpose. Knowing more about someone does not grant greater authority over them. Software should respect the limits of what it knows and what it is permitted to do.",
           "anchorId": "reader-chapter-people-and-records"
         },
@@ -339,19 +339,19 @@ export const doctrineFrontDoor = {
     "support": "We are developing tools to help you understand requirements, preserve your evidence and examine decisions that affect your life.",
     "sections": [
       {
-        "title": "Because data is consequential.",
+        "title": "Because data is consequential",
         "body": "Codexware combines a developing application with a governed deployment architecture. Reusable reasoning, verification and evidence components are composed within declared boundaries. Useful computational tools preserve the evidence, assumptions and meaning needed by the next operation."
       },
       {
-        "title": "Start with the people who need these tools.",
+        "title": "Start with the people who need these tools",
         "body": "Help people check a form against stated requirements, organize evidence or prepare a proposed correction without submitting it. They should not have to wait for institutions to adopt the tools to benefit from them. These are design directions, not available services."
       },
       {
-        "title": "Capability without captivity.",
+        "title": "Capability without captivity",
         "body": "Portability, interoperability, meaningful exit and human authorization are design requirements. Restricting execution authority need not restrict ownership of the work."
       },
       {
-        "title": "Research broadly. Deploy narrowly.",
+        "title": "Research broadly, deploy narrowly",
         "body": "Separate research machinery from deployment machinery. Each appliance receives only the capabilities needed for its declared purpose. Verify rigorously. Release selectively. Govern continuously."
       },
       {
@@ -366,7 +366,7 @@ export const doctrineFrontDoor = {
     "principle": "Your information should remain yours. Your decisions remain your own.",
     "status": "In development. This page describes intended capabilities and formal design and verification requirements, not a product release, availability promise, MCP integration, or claim of verified safeguards.",
     "commitments": {
-      "heading": "Computational capability. Human authority.",
+      "heading": "Computational capability, human authority",
       "intro": "Five requirements guide the design of deployment boundaries.",
       "items": [
         {
@@ -443,21 +443,21 @@ export const doctrineFrontDoor = {
     }
   },
   "foundation": {
-    "title": "Inquiry before implementation.",
+    "title": "Inquiry before implementation",
     "body": "Our inquiries draw on mathematics, physics, computer science and engineering. From computation beneath disciplines to computation between them, we seek ways for specialized knowledge to work together without erasing its native meaning. The discoveries are not predetermined; their potential for cross-disciplinary application is the premise."
   },
   "history": {
-    "title": "From practice to research.",
+    "title": "From practice to research",
     "body": "Projectr began in 2019 as an attempt to organize and share constructive activity. The evolving data structures needed to describe projects and their relationships exposed a deeper engineering problem. Following years of systems engineering and independent inquiry, the founder returned to fundamentals. The intervening years became a one-person practice of that original vision: preserving the process, progress and artifacts of constructive work."
   },
   "mission": {
-    "title": "Public service. Independent inquiry.",
+    "title": "Public service, independent inquiry",
     "body": "Public good is a central reason for our research, not an incidental application. We seek to make consequential decisions understandable, preserve individual evidence and improve institutions’ ability to detect and repair failures. Commercial work should sustain independent inquiry, not determine its conclusions. Public-interest infrastructure should reduce the work required of the people it serves.",
     "humanPurpose": "Our goal is not to remove people from institutions. It is to free people from unnecessary institutional machinery.",
     "closing": "Systems should serve the people who depend on them. We are building the research, engineering and institutional infrastructure to help make that possible."
   },
   "maintenance": {
-    "title": "Boundary First Labs is maintenance.",
+    "title": "Boundary First Labs is maintenance",
     "body": "Every functioning system depends on conditions that must be maintained: a bridge needs structural integrity, software needs compatible interfaces, institutions need accurate information, and households need reliable access to essential services. Missed system requirements become undocumented human responsibilities. We investigate what fails, who bears the costs, and how to prevent or repair it. Trace consequences, repair defects, and maintain the systems upon which people depend. Maintenance is the preservation of possibility."
   },
   "navigation": [
@@ -477,17 +477,17 @@ export const doctrineFrontDoor = {
   "doctrineContexts": {
     "home": {
       "eyebrow": "Institutional foundations",
-      "title": "Three doctrines. One purpose.",
+      "title": "Three doctrines, one purpose",
       "intro": "Understand systems, govern computation and expand human agency in service of the public good."
     },
     "codexware": {
       "eyebrow": "Design foundations",
-      "title": "Three doctrines inform the application.",
+      "title": "Three doctrines inform the application",
       "intro": "Understand the systems people rely on, govern the tools and preserve human agency."
     },
     "observatory": {
       "eyebrow": "Institutional foundations",
-      "title": "The doctrines behind the work.",
+      "title": "The doctrines behind the work",
       "intro": "These principles guide what we investigate, how we use computation and whom the work serves."
     },
     "work-with-us": {
@@ -502,7 +502,7 @@ export const doctrineFrontDoor = {
     },
     "digital-native-institution": {
       "eyebrow": "Our institutional commitments",
-      "title": "The doctrines we apply to ourselves.",
+      "title": "The doctrines we apply to ourselves",
       "intro": "Our own organization is a consequential system. Its machinery, decisions and relationships are subject to the same principles we develop for others."
     },
     "work-with-us/professional-services": {
@@ -527,42 +527,42 @@ export const doctrineFrontDoor = {
     },
     "observatory/intellectual-lineage": {
       "eyebrow": "Institutional foundations",
-      "title": "The doctrines behind the work.",
+      "title": "The doctrines behind the work",
       "intro": "Understand systems, govern computation and expand human agency."
     },
     "observatory/research-architecture": {
       "eyebrow": "Institutional foundations",
-      "title": "The doctrines behind the work.",
+      "title": "The doctrines behind the work",
       "intro": "Understand systems, govern computation and expand human agency."
     },
     "observatory/computational-inquiry": {
       "eyebrow": "Institutional foundations",
-      "title": "The doctrines behind the work.",
+      "title": "The doctrines behind the work",
       "intro": "Understand systems, govern computation and expand human agency."
     },
     "observatory/demonstrations": {
       "eyebrow": "Institutional foundations",
-      "title": "The doctrines behind the work.",
+      "title": "The doctrines behind the work",
       "intro": "Understand systems, govern computation and expand human agency."
     },
     "codexware/economic-maintenance": {
       "eyebrow": "Design foundations",
-      "title": "The doctrines behind these questions.",
+      "title": "The doctrines behind these questions",
       "intro": "These principles guide the research and the tools we aim to build."
     },
     "codexware/civic-record": {
       "eyebrow": "Design foundations",
-      "title": "The doctrines behind Civic Record.",
+      "title": "The doctrines behind Civic Record",
       "intro": "The proposed evidence workspace puts people in control of their own records. It is intended to put these institutional commitments into practice."
     },
     "observatory/instruments": {
       "eyebrow": "Institutional foundations",
-      "title": "The principles behind these instruments.",
+      "title": "The principles behind these instruments",
       "intro": "The research questions, limits on computation and purpose of the tools belong together."
     },
     "evidence-and-trust": {
       "eyebrow": "Institutional foundations",
-      "title": "The principles behind the work.",
+      "title": "The principles behind the work",
       "intro": "These doctrines connect consequential systems, computational authority and constructive human agency."
     }
   },
@@ -888,7 +888,7 @@ export const doctrineFrontDoor = {
     ],
     "exhibit": {
       "eyebrow": "Teaching example · fictional records",
-      "title": "When one word hides two different states.",
+      "title": "When one word hides two different states",
       "intro": "Imagine two service requests that both display the label “Complete.” Their underlying situations differ.",
       "cases": [
         {
@@ -932,50 +932,50 @@ export const doctrineFrontDoor = {
     "lead": "We organize research and engineering around lasting digital records, computational tools and clear human responsibility.",
     "support": "Years of accumulated work, software and governed computational assistance provide capacity without a large staff or traditional departments.",
     "homeIntro": {
-      "title": "A digital-native research institution.",
+      "title": "A digital-native research institution",
       "body": "The Lab is built around persistent knowledge, computational instruments and accountable human direction. Explore the values, stewardship and continuity commitments behind our solo-operated institution.",
       "label": "How our institution works",
       "href": "/digital-native-institution"
     },
     "workIntro": {
-      "title": "Know the institution you are working with.",
+      "title": "Know the institution you are working with",
       "body": "Boundary First Labs is currently solo-operated and computationally leveraged. Learn about our institutional values, responsibilities, limits and the continuity of the work.",
       "label": "Explore our institutional commitments",
       "href": "/digital-native-institution"
     },
     "sections": [
       {
-        "title": "Digital-native, not merely digital.",
+        "title": "Digital-native, not merely digital",
         "body": "An organization can conduct its business online while retaining the same operating structure as a conventional institution. By digital-native, we mean something more fundamental: the knowledge, workflows, evidence and instruments through which the institution operates are designed to be digitally represented, maintained and carried forward. The digital environment is not just a communication channel. It is part of the institutional architecture.",
         "anchorId": "reader-chapter-digital-native"
       },
       {
-        "title": "Institutional capacity beyond headcount.",
+        "title": "Institutional capacity beyond headcount",
         "body": "Boundary First Labs is currently run by its founder. Computational tools assist with research, representation, implementation, documentation and verification. They are tools, not an independent governing body or a substitute for human responsibility. The goal is not to imitate a large organization, but to build useful institutional capabilities while operating as a one-person organization.",
         "anchorId": "reader-chapter-capacity"
       },
       {
-        "title": "Research as living infrastructure.",
+        "title": "Research as living infrastructure",
         "body": "The Lab preserves the process, progress and artifacts of constructive work. Rather than treat research as isolated final papers, we develop and use interconnected infrastructure intended to keep questions, hypotheses, mathematical constructions, computational experiments, source evidence, negative results, corrections and verification obligations traceable as the work evolves. A living body of research should be capable of remembering how it came to know what it knows. The laboratory is itself a longitudinal demonstration of durable research practice, not independent validation of a multi-user commercial platform.",
         "anchorId": "reader-chapter-living-infrastructure"
       },
       {
-        "title": "Governance belongs in the architecture.",
+        "title": "Governance belongs in the architecture",
         "body": "The same doctrines that guide our research guide our operations. Consequential work should have a declared purpose, a bounded scope, explicit authority, evidence of what changed and a responsible route for correction. Computational capability does not confer permission to act. Research conclusions remain subject to their own evidence and review; a successful workflow is not proof of a successful scientific result. Our institutional commitments are public good, human agency, scientific integrity, explicit authority, maintenance, repair, continuity and collaboration. They guide the work rather than certify every implementation.",
         "anchorId": "reader-chapter-governance"
       },
       {
-        "title": "An institution must be capable of repairing itself.",
+        "title": "An institution must be capable of repairing itself",
         "body": "Governance includes more than following existing rules. It includes examining whether the rules and representations remain adequate to their purpose, who can revise them lawfully, what evidence would justify a change, and how the consequences of that change will be verified. We intend to apply the same standard to our own institution: preserve rationale, expose failures, retain criticism and keep a responsible path to correction.",
         "anchorId": "reader-chapter-self-repair"
       },
       {
-        "title": "Continuity is a design requirement.",
+        "title": "Continuity is a design requirement",
         "body": "The objective is to make accumulated knowledge and useful capabilities increasingly inspectable, teachable, transferable and repairable. A digital-native institution should preserve its ability to continue when an instrument changes, a hypothesis fails or a participant leaves. Founder dependence, operational resilience and independent reproduction remain real challenges that the institution must address, not achievements assumed from its architecture. Build institutions that can survive their founders. Preserve the knowledge, rationale, instruments, evidence and responsibilities needed for a qualified successor to carry the work forward or rebuild a lost capability. We are developing toward this condition; succession and independent regeneration are not yet established.",
         "anchorId": "reader-chapter-continuity"
       },
       {
-        "title": "Collaboration by construction.",
+        "title": "Collaboration by construction",
         "body": "A small institution need not do every kind of work itself. We welcome domain expertise, independent criticism, applied problems and partnerships. Engagements should define the contribution, authority, deliverables, review and handoff appropriate to the work. Our aim is to leave useful knowledge and capability with the people we work with, not manufacture dependence on the Lab. We prefer interfaces that let collaborators coordinate while preserving their appropriate authority, expertise, information and responsibility.",
         "anchorId": "reader-chapter-collaboration"
       }
@@ -998,7 +998,7 @@ export const doctrineFrontDoor = {
       }
     ],
     "stewardship": {
-      "heading": "The values that govern our work.",
+      "heading": "The values that govern our work",
       "intro": "Five values from the Lab’s Institutional Charter orient our research and engineering. They are commitments against which we intend our work to be examined, not assurances that every implementation or institutional practice has already satisfied them.",
       "values": [
         {
@@ -1027,7 +1027,7 @@ export const doctrineFrontDoor = {
           "body": "Increase people’s capacity to understand, decide, challenge, repair and continue. Respect qualified expertise and collaboration without making the Lab an indispensable intermediary."
         }
       ],
-      "limitsHeading": "What we pursue — and what we do not.",
+      "limitsHeading": "What we pursue — and what we do not",
       "limitsIntro": "Our ambition is bounded by the purpose and responsibilities of the institution. A shared method must preserve the distinctions and standards of the disciplines it connects.",
       "limits": [
         {
@@ -1299,7 +1299,7 @@ export const doctrineFrontDoor = {
           "anchorId": "reader-chapter-institution-application"
         },
         {
-          "title": "Sustain the purpose rather than maximize scale.",
+          "title": "Sustain the purpose rather than maximize scale",
           "body": "Applied engagements can produce revenue and external evidence of utility. Research support can preserve time for investigation without a predetermined commercial conclusion. Future software and publications may diversify earned support when readiness and demand justify them. Commercial capability in service of public purpose: paid engagements may sustain independent research and freely accessible public-interest tools, through shared research and engineering infrastructure. Public benefit should not depend upon the permanent exhaustion of the people producing it. Growth is a design decision, not a default success condition. We seek sufficient resources for responsible research, engineering and public service. Scale is justified when it adds useful capability and the resulting obligations can be supported. Capacity before expansion; preserve the ability to stop, maintain and repair. Commercial success should sustain the purpose, not replace it.",
           "anchorId": "reader-chapter-purpose"
         },
@@ -1366,7 +1366,7 @@ export const doctrineFrontDoor = {
           "anchorId": "reader-chapter-contribution"
         }
       ],
-      "keyHeading": "Three objects that should not be confused.",
+      "keyHeading": "Three objects that should not be confused",
       "cards": [
         {
           "title": "Inherited foundations",
@@ -1408,7 +1408,7 @@ export const doctrineFrontDoor = {
           "anchorId": "reader-chapter-native-domains"
         },
         {
-          "title": "Inquiry before predetermined conclusions.",
+          "title": "Inquiry before predetermined conclusions",
           "body": "Fundamental research is valuable because results cannot always be specified in advance. We develop research infrastructure that allows questions to evolve while retaining evidence, uncertainty, counterexamples and the native standards of each discipline. The discoveries are not predetermined; their potential for cross-disciplinary application is the premise. Shared structures do not establish a universal reduction of the domains they connect.",
           "anchorId": "reader-chapter-inquiry"
         },
@@ -1428,7 +1428,7 @@ export const doctrineFrontDoor = {
           "anchorId": "reader-chapter-learning-architecture"
         }
       ],
-      "keyHeading": "Research directions: questions, not announced results.",
+      "keyHeading": "Research directions: questions, not announced results",
       "cards": [
         {
           "title": "Representational Systematics",
@@ -1501,7 +1501,7 @@ export const doctrineFrontDoor = {
           "anchorId": "reader-chapter-transfer"
         }
       ],
-      "keyHeading": "Functions of a research environment.",
+      "keyHeading": "Functions of a research environment",
       "cards": [
         {
           "title": "Persistent knowledge",
@@ -1557,7 +1557,7 @@ export const doctrineFrontDoor = {
           "anchorId": "reader-chapter-institutions"
         }
       ],
-      "keyHeading": "Compare the representations.",
+      "keyHeading": "Compare the representations",
       "cards": [
         {
           "title": "Geometry",
@@ -1769,7 +1769,7 @@ export const doctrineFrontDoor = {
     "lead": "Civic Record is a developing local workspace for keeping and understanding records of your dealings with institutions and other consequential systems. You should not have to rely on an institution’s memory to show what happened.",
     "support": "When bills, notices, receipts or messages disagree, the tool is intended to help you reconstruct what happened, not decide the matter for you. Development explores selective sharing, portable recovery and local storage protection; independent security, accessibility, platform and real-data reviews remain necessary.",
     "status": "Private synthetic-data development. Bounded development work exists; no public release, approved real-data intake, production-readiness claim or independently established human-benefit claim is made. Security, accessibility, usability, distribution and stewardship reviews remain outstanding. Please do not send sensitive records for testing.",
-    "commitmentsHeading": "Useful without surrendering control.",
+    "commitmentsHeading": "Useful without surrendering control",
     "commitments": [
       {
         "title": "Preserve original records",
@@ -1807,7 +1807,7 @@ export const doctrineFrontDoor = {
       }
     ],
     "caseNote": "Fictional intended-use examples, not claims that the application is available, that a discrepancy has been resolved, or that the record establishes legal or financial standing.",
-    "boundaryHeading": "Documentation is not submission.",
+    "boundaryHeading": "Documentation is not submission",
     "boundaries": [
       {
         "title": "A local record is not an institutional acknowledgment",
@@ -1885,7 +1885,7 @@ export const doctrineFrontDoor = {
       },
       {
         "id": "civic",
-        "title": "Reconstruct what happened.",
+        "title": "Reconstruct what happened",
         "status": "Worked fictional walkthrough",
         "scenario": "A $240 bill does not reflect a $180 payment shown in another record.",
         "approach": "Preserve both originals, distinguish reported content from interpretation, and expose the unresolved relationship. A correction should not destroy its history.",
@@ -1910,7 +1910,7 @@ export const doctrineFrontDoor = {
       },
       {
         "id": "classification",
-        "title": "Navigate mathematical structure.",
+        "title": "Navigate mathematical structure",
         "status": "Worked mathematical comparison",
         "scenario": "Two groups can share selected laws and have different mathematical structures.",
         "approach": "Compare the cyclic group of order four with the Klein four-group. Both are standard inherited mathematics, not new Lab results.",
@@ -1935,7 +1935,7 @@ export const doctrineFrontDoor = {
       },
       {
         "id": "paper",
-        "title": "Inspect the argument.",
+        "title": "Inspect the argument",
         "status": "Worked sample review",
         "scenario": "A short proof attempt reaches a conclusion broader than its assumptions.",
         "approach": "Map the premise, intermediate transformation and conclusion; test a counterexample; repair the statement rather than conceal the defect.",
@@ -1960,7 +1960,7 @@ export const doctrineFrontDoor = {
       },
       {
         "id": "repair",
-        "title": "Make restoration possible.",
+        "title": "Make restoration possible",
         "status": "Interactive teaching model",
         "scenario": "A household needs a $2,000 repair while other obligations must also be met.",
         "approach": "Adjust the hypothetical repair cost, resources and protected obligations. Available repair funds are max(resources minus obligations, 0). The gap is the remaining repair cost.",
@@ -1985,7 +1985,7 @@ export const doctrineFrontDoor = {
       },
       {
         "id": "authority",
-        "title": "Capability without unrestricted authority.",
+        "title": "Capability without unrestricted authority",
         "status": "Interactive teaching model",
         "scenario": "A fictional local assistant can inspect selected evidence, analyze it and prepare a recommendation.",
         "approach": "Toggle the declared capabilities. Analysis requires inspection; drafting requires both. Changing the model is not actual consent, and no permission to send or transact is granted.",
@@ -2078,85 +2078,85 @@ export const doctrineFrontDoor = {
   },
   "instrumentLinks": {
     "observatory": {
-      "title": "Explore the instrument collection.",
+      "title": "Explore the instrument collection",
       "body": "Change a fictional model or examine a worked example. See the evidence and its limits.",
       "label": "Explore Instruments",
       "href": "/observatory/instruments"
     },
     "codexware": {
-      "title": "See the design principles in action.",
+      "title": "See the design principles in action",
       "body": "Explore fictional evidence, repair-access and bounded-authority teaching models. They are not a released application.",
       "label": "Explore Instruments",
       "href": "/observatory/instruments"
     },
     "codexware/civic-record": {
-      "title": "Follow a fictional record discrepancy.",
+      "title": "Follow a fictional record discrepancy",
       "body": "Inspect the $240 bill and $180 payment walkthrough. No personal record intake or external submission.",
       "label": "Explore Instruments",
       "href": "/observatory/instruments"
     },
     "codexware/economic-maintenance": {
-      "title": "Explore the repair frontier.",
+      "title": "Explore the repair frontier",
       "body": "Adjust hypothetical resources, protected obligations and repair cost in an illustrative local model.",
       "label": "Explore Instruments",
       "href": "/observatory/instruments"
     },
     "work-with-us": {
-      "title": "See examples of the work.",
+      "title": "See examples of the work",
       "body": "Explore structural comparison, a constructed paper review and bounded consequence analysis before discussing an engagement.",
       "label": "Explore Instruments",
       "href": "/observatory/instruments"
     },
     "work-with-us/paper-auditing": {
-      "title": "Inspect a sample argument.",
+      "title": "Inspect a sample argument",
       "body": "See an elementary constructed review with an assumption inventory, counterexample and narrowed conclusion. Not an actual client audit.",
       "label": "Explore Instruments",
       "href": "/observatory/instruments"
     },
     "work-with-us/professional-services": {
-      "title": "Examine a bounded model.",
+      "title": "Examine a bounded model",
       "body": "See how missing distinctions and invalid assumptions can make defects observable.",
       "label": "Explore Instruments",
       "href": "/observatory/instruments"
     },
     "work-with-us/public-service": {
-      "title": "Trace what the evidence can establish.",
+      "title": "Trace what the evidence can establish",
       "body": "Explore fictional institutional and repair-access examples; not empirical conclusions about specific households or agencies.",
       "label": "Explore Instruments",
       "href": "/observatory/instruments"
     },
     "observatory/demonstrations": {
-      "title": "Move from reading to exploration.",
+      "title": "Move from reading to exploration",
       "body": "Try the separate collection of fixed, local teaching instruments. The selected demonstrations here remain a static reader.",
       "label": "Explore Instruments",
       "href": "/observatory/instruments"
     },
     "observatory/research-architecture": {
-      "title": "Explore mathematical structure.",
+      "title": "Explore mathematical structure",
       "body": "Compare standard finite groups and a two-state observation model without accessing the underlying private research.",
       "label": "Explore Instruments",
       "href": "/observatory/instruments"
     },
     "digital-native-institution": {
-      "title": "See how we make work inspectable.",
+      "title": "See how we make work inspectable",
       "body": "The instruments separate a question, method, result and evidence boundary. They are a curated exhibition, not an operational view of the Lab.",
       "label": "Explore Instruments",
       "href": "/observatory/instruments"
     },
     "ai-governance": {
-      "title": "Try a bounded authority model.",
+      "title": "Try a bounded authority model",
       "body": "Toggle three fictional capabilities. External execution remains denied in the toy policy; this does not establish real deployment isolation.",
       "label": "Explore Instruments",
       "href": "/observatory/instruments"
     },
     "consequential-systems": {
-      "title": "Explore the conditions for repair.",
+      "title": "Explore the conditions for repair",
       "body": "Compare observed states and change hypothetical household constraints. The teaching models distinguish internal records from external adequacy.",
       "label": "Explore Instruments",
       "href": "/observatory/instruments"
     },
     "constructive-human-agency": {
-      "title": "See how evidence supports independent judgment.",
+      "title": "See how evidence supports independent judgment",
       "body": "Follow fictional Civic Record evidence and inspect the limits of a bounded computational assistant.",
       "label": "Explore Instruments",
       "href": "/observatory/instruments"
@@ -2164,7 +2164,7 @@ export const doctrineFrontDoor = {
   },
   "audiencePaths": {
     "codexware": {
-      "title": "Start with what you need to understand.",
+      "title": "Start with what you need to understand",
       "intro": "Intended uses and teaching examples; Codexware is in development.",
       "cards": [
         {
@@ -2202,7 +2202,7 @@ export const doctrineFrontDoor = {
       ]
     },
     "observatory": {
-      "title": "Find a question you recognize.",
+      "title": "Find a question you recognize",
       "intro": "",
       "cards": [
         {
@@ -2256,7 +2256,7 @@ export const doctrineFrontDoor = {
       ]
     },
     "work-with-us": {
-      "title": "Where we can help.",
+      "title": "Where we can help",
       "intro": "Inspection is open; engagement is voluntary.",
       "cards": [
         {
@@ -2343,7 +2343,7 @@ export const doctrineFrontDoor = {
     }
   },
   "contactDraft": {
-    "name": "Bring us a problem.",
+    "name": "Bring us a problem",
     "lead": "Tell us what you are trying to understand, build or repair. A brief, non-confidential description is enough. You do not need a complete specification or the right internal category.",
     "notice": "Do not include confidential documents, credentials or sensitive personal records. This optional draft composer does not send, upload or save your text. Copy it only when you choose; sending an email is a separate action.",
     "categories": [
@@ -2398,7 +2398,7 @@ export const doctrineFrontDoor = {
       "open-lab": "general",
       "general": "general"
     },
-    "nextTitle": "A useful conversation, not an obligation.",
+    "nextTitle": "A useful conversation, not an obligation",
     "nextBody": "Explore without obligation. If you choose to write, we can discuss whether there is a useful, feasible relationship. Any work requires a separate agreement on scope, access, authority, responsibilities, deliverables, verification and terms. A first note is not a project, a pilot enrollment or a guarantee of a response.",
     "closing": "Collaboration by construction."
   },
@@ -2592,7 +2592,7 @@ export const doctrineFrontDoor = {
       }
     ],
     "example": {
-      "title": "A shared law profile need not determine structure.",
+      "title": "A shared law profile need not determine structure",
       "status": "Worked mathematical comparison · Established background",
       "question": "Can a selected list of shared laws establish that two finite groups are isomorphic?",
       "domain": "The cyclic group of order four, with addition modulo 4, and the Klein four-group, with componentwise addition modulo 2 on pairs of bits.",
@@ -2657,7 +2657,7 @@ export const doctrineFrontDoor = {
       }
     ],
     "product": {
-      "title": "An instrument must earn the trust placed in it.",
+      "title": "An instrument must earn the trust placed in it",
       "body": "Consequential software requires more than an intended-functionality demonstration. Security, privacy, accessibility, recovery, deployment conditions and responsibility require their own evaluation. Codexware distinguishes synthetic development, internal testing, independent review and authorization for real-world use. Civic Record remains a private prototype; no public release or approved real-data intake is asserted.",
       "links": [
         {
@@ -2675,7 +2675,7 @@ export const doctrineFrontDoor = {
       ]
     },
     "publication": {
-      "title": "Transparency does not require indiscriminate disclosure.",
+      "title": "Transparency does not require indiscriminate disclosure",
       "body": "We intend to make selected artifacts, methods, demonstrations and publications inspectable, with appropriate attribution, rights, privacy and responsible security review. Unpublished technical work is not independently established merely because it exists. Public editorial material, specialist claims and confidential technical disclosures have distinct review conditions.",
       "sources": [
         {
@@ -2689,7 +2689,7 @@ export const doctrineFrontDoor = {
       ]
     },
     "correction": {
-      "title": "There should be a way to challenge the work.",
+      "title": "There should be a way to challenge the work",
       "body": "We welcome constructive criticism, independent mathematical and technical review, reproducibility studies and appropriately scoped product assessment. Identify the public page or artifact, the relevant claim, the reason for concern and any non-confidential supporting evidence. We propose to assess the concern, identify affected statements and record warranted corrections and remaining uncertainty. This is a correction path, not a guaranteed response time or independent certification.",
       "notice": "Do not send credentials, confidential material or sensitive personal records in an initial inquiry.",
       "links": [
@@ -2722,7 +2722,7 @@ export const doctrineFrontDoor = {
   "trustLinks": [
     {
       "context": "codexware",
-      "title": "Assurance follows the implementation.",
+      "title": "Assurance follows the implementation",
       "body": "Inspect how we distinguish declared design requirements, synthetic testing and real-world release approval.",
       "href": "/evidence-and-trust",
       "label": "Explore Evidence & Trust"
@@ -2736,7 +2736,7 @@ export const doctrineFrontDoor = {
     },
     {
       "context": "codexware/economic-maintenance",
-      "title": "Evidence is adequate only within its scope.",
+      "title": "Evidence is adequate only within its scope",
       "body": "Examine the distinction between illustrative models, observed data, reproduced computations and empirical findings.",
       "href": "/evidence-and-trust",
       "label": "Explore Evidence & Trust"
@@ -2750,35 +2750,35 @@ export const doctrineFrontDoor = {
     },
     {
       "context": "observatory/instruments",
-      "title": "A demonstration has a boundary.",
+      "title": "A demonstration has a boundary",
       "body": "Inspect the evidence standards behind the teaching models and worked examples.",
       "href": "/evidence-and-trust",
       "label": "Explore Evidence & Trust"
     },
     {
       "context": "work-with-us",
-      "title": "Make the basis for collaboration inspectable.",
+      "title": "Make the basis for collaboration inspectable",
       "body": "Understand the Lab’s research practice, human responsibility and approach to independent evaluation.",
       "href": "/evidence-and-trust",
       "label": "Explore Evidence & Trust"
     },
     {
       "context": "work-with-us/paper-auditing",
-      "title": "Verification is not a single score.",
+      "title": "Verification is not a single score",
       "body": "Examine the distinctions among mathematical deduction, computation, separate checkers and external scientific review.",
       "href": "/evidence-and-trust",
       "label": "Explore Evidence & Trust"
     },
     {
       "context": "digital-native-institution",
-      "title": "An institution answerable to evidence.",
+      "title": "An institution answerable to evidence",
       "body": "Examine the founder-attributed lineage, computational research practice and correction commitments.",
       "href": "/evidence-and-trust",
       "label": "Explore Evidence & Trust"
     },
     {
       "context": "related",
-      "title": "Evidence, authority and correction.",
+      "title": "Evidence, authority and correction",
       "body": "Explore how we evaluate our own work, acknowledge computational assistance and preserve human responsibility.",
       "href": "/evidence-and-trust",
       "label": "Explore Evidence & Trust"
