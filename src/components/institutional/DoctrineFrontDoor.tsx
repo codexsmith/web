@@ -210,10 +210,10 @@ export function DoctrineLandingPage({ slug }: { slug: "consequential-systems" | 
         </section>
         <ReaderSectionNav sections={[...chapterSectionEntries(doctrine.sections), ...("framework" in doctrine ? [{ id: "reader-framework", label: "Governance in practice" }] : []), { id: "reader-guide", label: doctrine.guide.title }, { id: "reader-explore", label: "Explore the work" }, { id: "reader-instruments", label: "Instruments" }, ...doctrineClosingSectionEntries("related")]} />
         <DoctrineEditorialBody doctrine={doctrine} />
-        {"framework" in doctrine && <section className={styles.section} data-governance-framework><h2 id="reader-framework" tabIndex={-1} data-reader-section-target>Different capabilities, different obligations.</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Governance in practice</p></div><div className={styles.frameworkGrid} data-reader-collection="parallel">{doctrine.framework.map(item => <article key={item.title}><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></section>}
+        {"framework" in doctrine && <section className={styles.section} data-governance-framework><h2 id="reader-framework" tabIndex={-1} data-reader-section-target>Different capabilities, different obligations</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Governance in practice</p></div><div className={styles.frameworkGrid} data-reader-collection="parallel">{doctrine.framework.map(item => <article key={item.title}><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></section>}
         <DoctrineReaderGuide doctrine={doctrine} />
         <section className={styles.section}>
-          <h2 id="reader-explore" tabIndex={-1} data-reader-section-target>Explore the work.</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Go deeper</p></div>
+          <h2 id="reader-explore" tabIndex={-1} data-reader-section-target>Explore the work</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Go deeper</p></div>
           <div className={styles.links}>{doctrine.depth.map((link) => <Link key={link.href} className={styles.textLink} href={link.href}>{link.label}</Link>)}</div>
         </section>
         <InstrumentCollectionLink context={slug} />
@@ -359,7 +359,7 @@ export function DigitalNativeInstitutionPage() {
         </section>
         <blockquote className={styles.principle} data-reader-heritage="stewardship">{institution.principle}</blockquote>
         <section className={styles.section}>
-          <h2 id="reader-institution-work" tabIndex={-1} data-reader-section-target>Get to know the work.</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Participate or inspect</p></div>
+          <h2 id="reader-institution-work" tabIndex={-1} data-reader-section-target>Get to know the work</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Participate or inspect</p></div>
           <div className={styles.links}>{institution.links.map((item) => <Link key={item.href} className={styles.textLink} href={item.href}>{item.label}</Link>)}</div>
         </section>
         <InstrumentCollectionLink context="digital-native-institution" />
@@ -392,13 +392,13 @@ export function EngagementGuidePage({ slug }: { slug: EngagementGuideSlug }) {
           <h2 id="reader-example" tabIndex={-1} data-reader-section-target>{guide.exampleTitle}</h2>
           {slug === "work-with-us/funding" && <div data-applied-product-portfolio>
             <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>{content.appliedProducts.heading}</p><p className={styles.sectionIntro}>{content.appliedProducts.intro}</p></div>
-            <div className={styles.pathGrid} data-reader-collection="reference">{content.appliedProducts.items.map(item => <article className={styles.pathCard} key={item.id} data-applied-product={item.id}><p className={styles.workStatus}>{item.status}</p><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+            <div className={styles.pathGrid} data-reader-collection="directory">{content.appliedProducts.items.map(item => <article className={styles.pathCard} key={item.id} data-applied-product={item.id}><div data-reader-path-identity><h3>{item.title}</h3><p className={styles.workStatus}>{item.status}</p></div><div data-reader-path-content><p>{item.body}</p></div></article>)}</div>
             <p className={styles.sectionIntro}>{content.appliedProducts.closing}</p>
           </div>}
           <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Example, not a completed engagement</p><p className={styles.sectionIntro}>{guide.example}</p></div>
         </section>
         <blockquote className={styles.principle}>{guide.principle}</blockquote>
-        <section className={styles.section} data-guide-contact><h2 id="reader-guide-contact" tabIndex={-1} data-reader-section-target>Start a conversation.</h2><p className={styles.sectionIntro}>{guide.ask}</p>
+        <section className={styles.section} data-guide-contact><h2 id="reader-guide-contact" tabIndex={-1} data-reader-section-target>Start a conversation</h2><p className={styles.sectionIntro}>{guide.ask}</p>
           <div className={styles.links}><Link className={styles.action} href="/contact">Contact the Lab</Link><a className={styles.textLink} href={`${PUBLIC_CONTACT_MAILTO}?subject=${encodeURIComponent(guide.subject)}`}>{PUBLIC_CONTACT_EMAIL}</a></div>
           <div className={styles.links}>{guide.links.map((item) => <Link key={item.href} className={styles.textLink} href={item.href}>{item.label}</Link>)}<Link className={styles.textLink} href="/work-with-us">All engagement paths</Link></div>
         </section>
