@@ -54,7 +54,7 @@ export function closingIssues({ route, context, expectedLinks, navRoutes, navLab
     const limits = main?.querySelector('[data-institutional-nongoals]');
     if (!same(Array.from(limits?.querySelectorAll('[data-institutional-limit]') ?? []).map(e=>e.getAttribute('data-institutional-limit')), ['domains','judgment','authority','repair','inquiry','access','sufficiency'])) issues.push("seven institutional non-goals required");
     if (!limits?.querySelector('[data-stewardship-limit]')?.textContent.includes('do not constitute a new charter')) issues.push("stewardship scope limitation missing");
-    if (!main?.textContent.includes('An institution must be capable of repairing itself.') || !main?.textContent.includes('Build institutions that can survive their founders.')) issues.push("self-repair and succession commitments missing");
+    if (!main?.textContent.includes('An institution must be capable of repairing itself') || !main?.textContent.includes('Build institutions that can survive their founders.')) issues.push("self-repair and succession commitments missing");
     if (panel?.querySelector('form,input,button,iframe,select,textarea') || limits?.querySelector('form,input,button,iframe,select,textarea')) issues.push("stewardship remains editorial");
   }
   if (route === "/codexware") {
@@ -81,7 +81,7 @@ export function closingIssues({ route, context, expectedLinks, navRoutes, navLab
   if (route === "/codexware/civic-record") {
     if (!main?.querySelector('[data-civic-status]')?.textContent.includes('no public release, approved real-data intake') || !main?.querySelector('[data-civic-case-limit]')?.textContent.includes('Fictional intended-use')) issues.push("Civic Record release and example limits required");
     if (main?.querySelectorAll('[data-civic-case]').length !== 3 || main?.querySelectorAll('[data-civic-commitments] article').length !== 4 || main?.querySelectorAll('[data-civic-boundary] article').length !== 3) issues.push("Civic Record content incomplete");
-    if (!main?.querySelector('[data-civic-boundary]')?.textContent.includes('Documentation is not submission.') || !main?.querySelector('a[href="/codexware"]') || main?.querySelector('form,button,input,select,textarea,iframe,embed,object')) issues.push("Civic Record boundary, return and editorial-only surface required");
+    if (!main?.querySelector('[data-civic-boundary]')?.textContent.includes('Documentation is not submission') || !main?.querySelector('a[href="/codexware"]') || main?.querySelector('form,button,input,select,textarea,iframe,embed,object')) issues.push("Civic Record boundary, return and editorial-only surface required");
   }
   if (route === "/codexware/economic-maintenance") {
     if (main?.querySelectorAll('[data-economic-topics] article').length !== 8 || main?.querySelectorAll('[data-economic-cases] article').length !== 10 || main?.querySelectorAll('[data-economic-method] li').length !== 6) issues.push("economic topic, case and method completeness");
@@ -89,6 +89,18 @@ export function closingIssues({ route, context, expectedLinks, navRoutes, navLab
     if (Array.from(main?.querySelectorAll('[data-economic-case]') ?? []).some(a => !['Research question','Constructed teaching example'].includes(a.querySelector('[data-case-status]')?.textContent.trim()) || !a.querySelector('[data-case-limit]')?.textContent.trim())) issues.push("economic case status and limitations required");
     if (!main?.querySelector('a[href="/codexware"]') || main?.querySelector('form,button,input,select,textarea,iframe,embed,object')) issues.push("economic page must return to Codexware and stay editorial");
   }
+  if (route === "/" || route === "/observatory") {
+    const pathway = main?.querySelector(`[data-applied-product-pathway="${route === "/" ? "home" : "observatory"}"]`);
+    if (!pathway?.textContent.includes("Boundary First Weather") || !pathway?.textContent.includes("Boundary First Chess") || pathway.querySelectorAll('a[href="/work-with-us/funding#reader-example"]').length !== 1) issues.push("applied product pathway must identify Weather and Chess and resolve to the funding section");
+  }
+  if (route === "/work-with-us/funding") {
+    const portfolio = main?.querySelector('[data-guide-example] [data-applied-product-portfolio]');
+    if (!same(Array.from(portfolio?.querySelectorAll('[data-applied-product]') ?? []).map(el => el.getAttribute("data-applied-product")), ["weather","chess","sports","integrations"]) || !portfolio?.textContent.includes("not available products")) issues.push("funding section requires four explicitly bounded applied product directions");
+    if (!main?.querySelector('[data-guide-example] > #reader-example')) issues.push("funding product destination must retain its section anchor");
+  }
+  if (route === "/codexware" && !main?.querySelector('[data-institutional-hero]')?.textContent.includes("flagship software application and computational platform")) issues.push("Codexware identity must be explicit at the masthead");
+  const labelHeadings = Array.from(main?.querySelectorAll("h1,h2,h3,h4,h5,h6") ?? []).filter(h => !h.matches('[data-institutional-tagline="home"]'));
+  if (labelHeadings.some(h => /\.$/.test(h.textContent.trim()))) issues.push("reader label headings must omit terminal periods: " + labelHeadings.filter(h => /\.$/.test(h.textContent.trim())).map(h => h.textContent.trim()).join("; "));
   const audienceRoutes = {"/codexware": ["/codexware/civic-record", "/observatory/instruments", "/codexware/economic-maintenance", "/observatory/instruments"], "/observatory": ["/observatory/research-architecture", "/observatory/instruments", "/observatory/computational-inquiry", "/observatory/research-architecture", "/observatory/instruments", "/observatory/demonstrations"], "/work-with-us": ["/work-with-us/professional-services", "/observatory/instruments", "/work-with-us/public-service", "/codexware/economic-maintenance", "/ai-governance", "/work-with-us/professional-services", "/work-with-us/paper-auditing", "/observatory/instruments", "/work-with-us/funding", "/digital-native-institution"]};
   if (route in audienceRoutes) {
     const panel = main?.querySelectorAll(`[data-audience-paths="${route.slice(1)}"]`) ?? [];
@@ -105,7 +117,7 @@ export function closingIssues({ route, context, expectedLinks, navRoutes, navLab
     for (const [name,[selector,count]] of Object.entries(expected)) if (exhibit[0]?.querySelectorAll(`[data-observatory-section="${name}"] ${selector}`).length !== count) issues.push(`observatory ${name} exhibit incomplete`);
     const demo = exhibit[0]?.querySelector('[data-observatory-section="demonstration"]');
     if (!demo?.textContent.includes("fictional records") || !demo?.textContent.includes("invented teaching example")) issues.push("observatory example must be explicitly fictional");
-    const allowed = ["/observatory/intellectual-lineage", "/observatory/research-architecture", "/observatory/computational-inquiry", "/observatory/demonstrations", "/digital-native-institution", "/codexware", "/work-with-us", "/observatory/instruments", "/evidence-and-trust"];
+    const allowed = ["/observatory/intellectual-lineage", "/observatory/research-architecture", "/observatory/computational-inquiry", "/observatory/demonstrations", "/work-with-us/funding#reader-example", "/digital-native-institution", "/codexware", "/work-with-us", "/observatory/instruments", "/evidence-and-trust"];
     if (!same(Array.from(exhibit[0]?.querySelectorAll("[data-exhibit-card] a") ?? []).map(a=>a.getAttribute("href")), allowed.slice(0,4))) issues.push("public Observatory gallery must expose four exhibits in order");
     const nonDoctrineLinks = bodyLinks().filter(a => !a.closest("[data-doctrine-links], [data-audience-paths]"));
     if (!same(nonDoctrineLinks.map(a => a.getAttribute("href")), allowed)) issues.push("observatory body exposes unapproved link or misses public destination");

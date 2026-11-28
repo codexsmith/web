@@ -100,7 +100,7 @@ try {
   const homeMarkers = [
     "Boundary First Labs", "Research and engineering for consequential systems.",
     "We study the boundaries where systems become real.",
-    "Trace what follows. Design for repair.", "Boundary First Labs is maintenance.",
+    "Trace what follows. Design for repair.", "Boundary First Labs is maintenance",
     'data-doctrine-links="home"',
   ];
   await expectPage("/", homeMarkers, ["THE LAB MACHINE", "Root World · operating environment"]);
@@ -132,10 +132,10 @@ try {
     await expectPage(path, [`data-doctrine-links="${context}"`]);
     await expectRedirect(`/v3${path}`, path);
   }
-  await expectPage("/contact", ["data-inquiry-composer", "Start with what brought you here.", "Copy inquiry draft"]);
+  await expectPage("/contact", ["data-inquiry-composer", "Start with what brought you here", "Copy inquiry draft"]);
   await expectPage("/", ['href="/digital-native-institution"']);
   await expectPage("/work-with-us", ['href="/digital-native-institution"']);
-  await expectPage("/digital-native-institution", ["A Digital-Native Institution", "One person, supported by carefully governed computational tools."], ["One human. Governed computational leverage."]);
+  await expectPage("/digital-native-institution", ["A Digital-Native Institution", "One person, with tools under human control."], ["One human. Governed computational leverage.", "One person, supported by carefully governed computational tools."]);
 
   // The Lab Machine remains available at the explicit versioned development
   // surface. This is the only place this smoke test expects Lab Machine identity.

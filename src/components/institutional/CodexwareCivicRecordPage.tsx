@@ -21,7 +21,7 @@ export function CodexwareCivicRecordPage() {
         <section className={styles.section} data-civic-cases><h2 id="reader-civic-cases" tabIndex={-1} data-reader-section-target>{c.casesHeading}</h2><div className={styles.pathGrid} data-reader-collection="cases">{c.cases.map(x=><article className={styles.pathCard} data-civic-case={x.id} key={x.id}><p className={styles.workStatus}>Illustrative intended use</p><h3>{x.title}</h3><p>{x.body}</p></article>)}</div><p className={styles.smallPrint} data-civic-case-limit>{c.caseNote}</p></section>
         <section className={styles.section} data-civic-boundary><h2 id="reader-civic-boundary" tabIndex={-1} data-reader-section-target>{c.boundaryHeading}</h2><div className={styles.pathGrid} data-reader-collection="reference">{c.boundaries.map(x=><article className={styles.pathCard} key={x.title}><h3>{x.title}</h3><p>{x.body}</p></article>)}</div></section>
         <blockquote className={styles.principle}>{c.principle}</blockquote>
-        <section className={styles.section}><h2 id="reader-explore" tabIndex={-1} data-reader-section-target>Explore the work.</h2><nav className={styles.links} aria-label="Civic Record reading paths">{c.links.map(x=><Link className={styles.textLink} key={x.href} href={x.href}>{x.label} →</Link>)}</nav></section>
+        <section className={styles.section}><h2 id="reader-explore" tabIndex={-1} data-reader-section-target>Explore the work</h2><nav className={styles.links} aria-label="Civic Record reading paths">{c.links.map(x=><Link className={styles.textLink} key={x.href} href={x.href}>{x.label} →</Link>)}</nav></section>
         <InstrumentCollectionLink context="codexware/civic-record" />
         <DoctrineLinksSection context="codexware/civic-record" />
       </div>

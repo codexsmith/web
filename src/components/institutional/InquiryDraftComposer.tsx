@@ -13,7 +13,7 @@ export function InquiryDraftComposer({ initialType }: { initialType: InquiryType
   useEffect(() => { if (root.current) return mountInquiryDraft(root.current); }, []);
   return <div className={styles.surface}><div className={styles.wrap}>
     <section ref={root} className={styles.section} data-inquiry-composer>
-      <p className={styles.eyebrow}>Optional tool</p><h2>Prepare a local inquiry draft.</h2>
+      <p className={styles.eyebrow}>Optional tool</p><h2>Prepare a local inquiry draft</h2>
       <p className={styles.smallPrint} data-draft-boundary>{ct.notice}</p>
       <details className={styles.readerDetails} data-draft-disclosure><summary>Open the optional draft composer</summary>
       <div className={styles.inquiryDraft}>

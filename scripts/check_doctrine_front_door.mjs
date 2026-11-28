@@ -99,6 +99,13 @@ const guideBody = front.split("export function EngagementGuidePage(")[1] ?? "";
 check(guideBody.includes('data-engagement-guide={slug}') && guideBody.includes('href="/work-with-us"') && guideBody.includes('href="/contact"'), "guide renderer, return link and contact");
 for (const marker of ["offers", "method", "status", "example", "contact"]) check(guideBody.includes(`data-guide-${marker}`), `guide renderer exposes ${marker}`);
 check(/<DoctrineLinksSection context=\{slug\}\s*\/>\s*<\/div>\s*<\/InstitutionalPageShell>/.test(guideBody), "guide ends with shared doctrine section");
+const portfolio = content.appliedProducts;
+check(portfolio.href === "/work-with-us/funding" && portfolio.anchorId === "reader-example" && admitted.has(portfolio.href), "applied product pathway uses the admitted funding route and stable section anchor");
+check(equal(portfolio.items.map(item => item.id), ["weather", "chess", "sports", "integrations"]) && portfolio.items.every(item => item.status && item.body) && portfolio.intro.includes("not available products"), "four applied product directions with explicit maturity boundaries");
+check(content.codexware.lead.includes("flagship software application and computational platform") && content.home.paths[0].tagline === "Flagship application", "Codexware identity precedes purpose");
+check(front.includes('data-applied-product-pathway="home"') && observatoryPage.includes('data-applied-product-pathway="observatory"') && front.includes('data-applied-product-portfolio') && front.includes('id="reader-example"'), "homepage and Observatory pathways resolve to the rendered funding portfolio");
+const periodHeadings = (node, trail = []) => Object.entries(node ?? {}).flatMap(([key, value]) => typeof value === "string" && /(title|heading)$/i.test(key) && /\.$/.test(value) && [...trail,key].join(".") !== "home.title" ? [[...trail,key].join(".")] : value && typeof value === "object" ? periodHeadings(value, [...trail,key]) : []);
+check(periodHeadings(content).length === 0, "reader headings omit terminal periods except the institutional slogan");
 console.log("Doctrine front-door and engagement-guide source contracts passed.");
 
 const exhibitRoutes = ["/observatory/intellectual-lineage", "/observatory/research-architecture", "/observatory/computational-inquiry", "/observatory/demonstrations"];
@@ -160,7 +167,7 @@ check(content.codexware.civicIntro.href === civicRoute && content.codexware.civi
 check(civic.status.includes("no public release") && civic.status.includes("no public release, approved real-data intake") && civic.status.includes("reviews remain outstanding"), "Civic Record release and intake limits");
 check(civic.cases.length === 3 && civic.caseNote.includes("Fictional intended-use") && civic.commitments.length === 4 && civic.boundaries.length === 3, "Civic Record examples and boundaries");
 check(civic.commitments[3].body.includes("without required AI, an external account, a subscription, payment or research participation"), "Civic Record independent free core requirement");
-check(civic.boundaryHeading === "Documentation is not submission." && civic.boundaries[1].body.includes("does not autonomously"), "Civic Record non-execution boundary");
+check(civic.boundaryHeading === "Documentation is not submission" && civic.boundaries[1].body.includes("does not autonomously"), "Civic Record non-execution boundary");
 check(read("src/app/v3/codexware/civic-record/page.tsx").includes('canonical: "/codexware/civic-record"'), "Civic Record canonical metadata");
 const civicRenderer = read(`${root}/CodexwareCivicRecordPage.tsx`);
 check(civicRenderer.includes('data-civic-status') && civicRenderer.includes('data-civic-case-limit') && civicRenderer.includes('context="codexware/civic-record"'), "Civic Record renders limitations and doctrines");
