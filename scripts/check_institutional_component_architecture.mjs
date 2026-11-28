@@ -293,13 +293,13 @@ expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].inc
 expect(routeRegistry.includes('{ label: "Contact", href: "/contact" }') && routeRegistry.includes('{ label: "Direct email", href: PUBLIC_CONTACT_MAILTO }'), "Footer exposes contact and direct email");
 
 // Explicit ordered expectations for the retained contextual navigation registry.
-// These are independent of the implementation, including the Observatory and Paper Mine paths.
+// These are independent of the implementation; the suspended Paper Mine is not a reader destination.
 const childRouteContracts = [
   ["about", ["founder", "labThroughTime", "aiGovernance", "observatory", "now", "collaboration"]],
   ["research", ["observatory", "atlas", "representationAtlas", "experiments", "claims", "apparatus"]],
   ["products", ["appliedWork", "evidence", "collaboration", "now"]],
   ["projects", ["appliedWork", "aiGovernance", "evidence", "now", "collaboration", "apparatus"]],
-  ["publications", ["observatory", "paperMine", "evidence", "claims", "experiments", "atlas"]],
+  ["publications", ["observatory", "evidence", "claims", "experiments", "atlas"]],
   ["funding", ["now", "appliedWork", "evidence", "collaboration"]],
   ["collaboration", ["appliedWork", "funding", "evidence", "now"]],
   ["appliedWork", ["aiGovernance", "evidence", "collaboration", "funding", "now"]],
@@ -336,7 +336,6 @@ const contextualChildPageKeys = [
   "atlas",
   "representationAtlas",
   "observatory",
-  "paperMine",
 ];
 
 const coveredChildPages = new Set();
@@ -402,7 +401,7 @@ expect(researchPage.includes("childLinks={institutionalChildRoutes.research}"), 
 expect(researchPage.includes("styles.researchGatewayBand"), "Research must split its orientation row into a gateway band");
 expect(researchPage.includes("styles.researchPublicationsFeature"), "Research must feature Publications beside the reading orientation");
 expect(researchPage.includes('href="/publications"'), "Research Publications feature must link to the publication catalog");
-expect(researchPage.includes('href="/research/paper-mine"'), "Research Publications feature must expose Paper Mine");
+expect(!researchPage.includes('href="/research/paper-mine"') && !routeRegistry.includes('href: "/research/paper-mine"'), "Research and publication navigation must not promote the suspended edition");
 expect(researchPage.includes("<ResearchContextSection />"), "Research must compose its contextual bento as a section component");
 expect(
   researchPage.indexOf('<MoonshotsFeature context="research" />') <
