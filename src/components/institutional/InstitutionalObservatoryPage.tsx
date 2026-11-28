@@ -21,12 +21,17 @@ export function InstitutionalObservatoryPage() {
             <p className={styles.support}>{exhibit.support}</p>
             <ReaderMastheadField kind="observation" />
           </section>
-        <ReaderSectionNav sections={[{ id: "audience-observatory", label: "Find your starting point" }, { id: "reader-exhibits", label: "Research exhibits" }, { id: "reader-foundations", label: "Intellectual foundations" }, { id: "reader-architecture", label: "Research architecture" }, { id: "reader-research", label: "Research directions" }, { id: "reader-method", label: "Research method" }, { id: "reader-evidence", label: "Evidence & claim status" }, { id: "reader-demonstration", label: "Demonstration" }, { id: "reader-release", label: "Public release" }, { id: "reader-instruments", label: "Instruments" }, ...doctrineClosingSectionEntries("observatory")]} />
+        <ReaderSectionNav sections={[{ id: "audience-observatory", label: "Find your starting point" }, { id: "reader-exhibits", label: "Research exhibits" }, { id: "reader-reference-library", label: "Reference library" }, { id: "reader-foundations", label: "Intellectual foundations" }, { id: "reader-architecture", label: "Research architecture" }, { id: "reader-research", label: "Research directions" }, { id: "reader-method", label: "Research method" }, { id: "reader-evidence", label: "Evidence & claim status" }, { id: "reader-demonstration", label: "Demonstration" }, { id: "reader-release", label: "Public release" }, { id: "reader-instruments", label: "Instruments" }, ...doctrineClosingSectionEntries("observatory")]} />
           <AudiencePathways context="observatory" />
           <div data-observatory-exhibit="public">
             <section className={styles.section} data-observatory-gallery>
               <h2 id="reader-exhibits" tabIndex={-1} data-reader-section-target>Four research exhibits</h2>
               <div className={styles.pathGrid} data-reader-collection="directory">{doctrineFrontDoor.observatoryExhibits.map(item => <article className={styles.pathCard} key={item.slug} data-exhibit-card={item.slug}><div data-reader-path-identity><h3>{item.name}</h3><p className={styles.workStatus} data-exhibit-directory-label>{item.directoryLabel}</p></div><div data-reader-path-content><p>{item.tagline}</p><Link className={styles.textLink} href={`/${item.slug}`} aria-label={`Explore exhibit: ${item.name}`}>Explore exhibit <span aria-hidden="true">→</span></Link></div></article>)}</div>
+            </section>
+            <section className={styles.section} data-reference-library-entry>
+              <h2 id="reader-reference-library" tabIndex={-1} data-reader-section-target>Foundations &amp; Reference Library</h2>
+              <p className={styles.sectionIntro}>Browse the published scholarship behind the inquiry. Search selected works, identify editions and follow links to their sources.</p>
+              <Link className={styles.textLink} href="/observatory/reference-library">Explore the reference library <span aria-hidden="true">→</span></Link>
             </section>
             <section className={styles.section} data-observatory-section="foundations">
               <h2 id="reader-foundations" tabIndex={-1} data-reader-section-target>{exhibit.foundationsHeading}</h2>

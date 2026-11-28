@@ -2,6 +2,7 @@
 export const sectionNavRoutes = [
   "/observatory",
   "/observatory/intellectual-lineage",
+  "/observatory/reference-library",
   "/observatory/research-architecture",
   "/observatory/computational-inquiry",
   "/observatory/demonstrations",

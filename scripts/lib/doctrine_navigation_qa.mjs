@@ -2,7 +2,7 @@
 import { sectionNavRoutes } from "../../src/components/institutional/content/readerSectionNavigation.ts";
 const guideRoutes = ["/work-with-us/professional-services", "/work-with-us/paper-auditing", "/work-with-us/public-service", "/work-with-us/funding"];
 const exhibitRoutes = ["/observatory/intellectual-lineage", "/observatory/research-architecture", "/observatory/computational-inquiry", "/observatory/demonstrations"];
-const principal = { "/evidence-and-trust": "evidence-and-trust", "/observatory/instruments": "observatory/instruments", "/codexware/civic-record": "codexware/civic-record", "/codexware/economic-maintenance": "codexware/economic-maintenance", ...Object.fromEntries(exhibitRoutes.map(route => [route, route.slice(1)])), ...Object.fromEntries(guideRoutes.map(route => [route, route.slice(1)])), "/digital-native-institution": "digital-native-institution", "/": "home", "/codexware": "codexware", "/observatory": "observatory", "/work-with-us": "work-with-us" };
+const principal = { "/observatory/reference-library": "observatory/reference-library", "/evidence-and-trust": "evidence-and-trust", "/observatory/instruments": "observatory/instruments", "/codexware/civic-record": "codexware/civic-record", "/codexware/economic-maintenance": "codexware/economic-maintenance", ...Object.fromEntries(exhibitRoutes.map(route => [route, route.slice(1)])), ...Object.fromEntries(guideRoutes.map(route => [route, route.slice(1)])), "/digital-native-institution": "digital-native-institution", "/": "home", "/codexware": "codexware", "/observatory": "observatory", "/work-with-us": "work-with-us" };
 const doctrines = ["/consequential-systems", "/ai-governance", "/constructive-human-agency"];
 const navRoutes = ["/codexware", "/observatory", "/work-with-us"];
 const navLabels = ["Codexware", "Observatory", "Work With Us"];
@@ -108,14 +108,23 @@ export function closingIssues({ route, context, expectedLinks, navRoutes, navLab
     for (const [name,[selector,count]] of Object.entries(expected)) if (exhibit[0]?.querySelectorAll(`[data-observatory-section="${name}"] ${selector}`).length !== count) issues.push(`observatory ${name} exhibit incomplete`);
     const demo = exhibit[0]?.querySelector('[data-observatory-section="demonstration"]');
     if (!demo?.textContent.includes("fictional records") || !demo?.textContent.includes("invented teaching example")) issues.push("observatory example must be explicitly fictional");
-    const allowed = ["/observatory/intellectual-lineage", "/observatory/research-architecture", "/observatory/computational-inquiry", "/observatory/demonstrations", "/digital-native-institution", "/codexware", "/work-with-us", "/observatory/instruments", "/evidence-and-trust"];
+    const allowed = ["/observatory/intellectual-lineage", "/observatory/research-architecture", "/observatory/computational-inquiry", "/observatory/demonstrations", "/observatory/reference-library", "/digital-native-institution", "/codexware", "/work-with-us", "/observatory/instruments", "/evidence-and-trust"];
     if (!same(Array.from(exhibit[0]?.querySelectorAll("[data-exhibit-card] a") ?? []).map(a=>a.getAttribute("href")), allowed.slice(0,4))) issues.push("public Observatory gallery must expose four exhibits in order");
     const nonDoctrineLinks = bodyLinks().filter(a => !a.closest("[data-doctrine-links], [data-audience-paths]"));
     if (!same(nonDoctrineLinks.map(a => a.getAttribute("href")), allowed)) issues.push("observatory body exposes unapproved link or misses public destination");
     if (exhibit[0]?.querySelector("form,iframe,embed,object,input,textarea,button,select")) issues.push("observatory must be a read-only exhibition");
     if (!exhibit[0]?.querySelector('[data-observatory-section="release"]')?.textContent.includes("does not announce a new scientific result")) issues.push("observatory release claim ceiling missing");
   }
-  if (route.startsWith("/observatory/") && route !== "/observatory/instruments") {
+  if (route === "/observatory/reference-library") {
+    const catalog = main?.querySelector("[data-reference-catalog]");
+    const rows = Array.from(catalog?.querySelectorAll("[data-reference-id]") ?? []);
+    if (rows.length !== 56 || new Set(rows.map(row=>row.getAttribute("data-reference-id"))).size !== 56) issues.push("reference library must contain 56 distinct bibliographic records");
+    if (catalog?.querySelectorAll('input[type="search"]').length !== 1 || catalog?.querySelectorAll("select").length !== 3 || catalog?.querySelectorAll('button[type="button"]').length !== 1 || catalog?.querySelector("form,iframe,embed,object,textarea,input:not([type=search])")) issues.push("reference library exposes only bounded local catalog controls");
+    if (!catalog?.querySelector('[data-reference-count]')?.textContent.includes("56 of 56 reference works") || !main?.querySelector("[data-reference-status]")?.textContent.includes("Bibliographic edition")) issues.push("reference catalog count and scope required");
+    if (!main?.querySelector('a[href="/observatory"]') || !main?.querySelector('a[href="/contact"]')) issues.push("reference catalog requires return and correction links");
+    if (rows.some(row=>!row.querySelector("h3")?.textContent.trim() || !row.querySelector('a[href^="https:"]') || Array.from(row.querySelectorAll("a")).some(a=>!a.href.startsWith("https:") || a.target!=="_blank" || !a.rel.includes("noopener") || !a.rel.includes("noreferrer")))) issues.push("every reference requires an explicit HTTPS link-out and source identity");
+  }
+  if (["/observatory/intellectual-lineage", "/observatory/research-architecture", "/observatory/computational-inquiry", "/observatory/demonstrations"].includes(route)) {
     if (main?.querySelectorAll("[data-exhibit-limit]").length !== 1 || !main?.querySelector("[data-exhibit-limit]")?.textContent.trim()) issues.push("exhibit requires explicit scope and limitations");
     if ((main?.querySelectorAll("[data-exhibit-body] article").length ?? 0) < 3 || (main?.querySelectorAll("[data-exhibit-comparison] article").length ?? 0) < 3) issues.push("exhibit content is incomplete");
     const refs = Array.from(main?.querySelectorAll("[data-exhibit-references] a[href^='https:']") ?? []).map(a=>a.getAttribute("href"));
@@ -162,7 +171,7 @@ export function closingIssues({ route, context, expectedLinks, navRoutes, navLab
     for (const marker of ["status", "example", "contact"]) if (!guide?.querySelector(`[data-guide-${marker}]`)) issues.push(`engagement guide lacks ${marker}`);
     if (!guide?.querySelector('[data-guide-contact] a[href="/contact"]') || !guide?.querySelector('[data-guide-contact] a[href^="mailto:admin@boundaryfirstlabs.com?subject="]') || !guide?.querySelector('a[href="/work-with-us"]')) issues.push("engagement guide requires contact and return paths");
   }
-  const trustRoutes = ["/codexware", "/codexware/civic-record", "/codexware/economic-maintenance", "/observatory", "/observatory/instruments", "/work-with-us", "/work-with-us/paper-auditing", "/digital-native-institution", "/ai-governance", "/consequential-systems", "/constructive-human-agency"];
+  const trustRoutes = ["/observatory/reference-library", "/codexware", "/codexware/civic-record", "/codexware/economic-maintenance", "/observatory", "/observatory/instruments", "/work-with-us", "/work-with-us/paper-auditing", "/digital-native-institution", "/ai-governance", "/consequential-systems", "/constructive-human-agency"];
   if (trustRoutes.includes(route)) {
     const panel = main?.querySelectorAll('[data-trust-link]') ?? [];
     if (panel.length !== 1 || panel[0].querySelectorAll('a[href="/evidence-and-trust"]').length !== 1) issues.push("contextual trust link missing or incorrect");
@@ -267,6 +276,19 @@ export async function verifyDoctrineTraversals(browser, base, viewport) {
         await page.waitForURL(url => url.pathname === "/observatory");
       } catch (error) { issues.push(`/observatory -> ${dest} -> /observatory: ${String(error)}`); }
     }
+    try {
+      const dest = "/observatory/reference-library";
+      const response = await page.goto(base + "/observatory", {waitUntil:"domcontentloaded"});
+      if (!response?.ok()) throw Error("Observatory unavailable");
+      await page.locator('[data-reference-library-entry] a[href="/observatory/reference-library"]').click();
+      await page.waitForURL(url=>url.pathname===dest);
+      await waitForDestinationMetadata(page, dest);
+      const failures=await doctrineNavigationIssues(page,dest);
+      if(failures.length)throw Error(failures.join("; "));
+      await page.locator('main [data-institutional-hero] a[href="/observatory"]').click();
+      await page.waitForURL(url=>url.pathname==="/observatory");
+      await waitForDestinationMetadata(page, "/observatory");
+    }catch(error){issues.push("Observatory reference library traversal: " + String(error));}
     for (const dest of guideRoutes) {
       try {
         const response = await page.goto(`${base}/work-with-us`, { waitUntil: "domcontentloaded" });

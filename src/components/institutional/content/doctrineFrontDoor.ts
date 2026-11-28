@@ -564,6 +564,11 @@ export const doctrineFrontDoor = {
       "eyebrow": "Institutional foundations",
       "title": "The principles behind the work.",
       "intro": "These doctrines connect consequential systems, computational authority and constructive human agency."
+    },
+    "observatory/reference-library": {
+      "eyebrow": "Institutional foundations",
+      "title": "The principles behind the inquiry",
+      "intro": "Consequential Systems, AI Governance and Constructive Human Agency guide the laboratory’s inquiry and its public purpose."
     }
   },
   "workWithUs": {
@@ -2809,6 +2814,13 @@ export const doctrineFrontDoor = {
       "context": "related",
       "title": "Evidence, authority and correction.",
       "body": "Explore how we evaluate our own work, acknowledge computational assistance and preserve human responsibility.",
+      "href": "/evidence-and-trust",
+      "label": "Explore Evidence & Trust"
+    },
+    {
+      "context": "observatory/reference-library",
+      "title": "Reference identity and evidence",
+      "body": "A bibliographic record helps locate a work. It does not establish the correctness of a claim or confer authority on the Lab’s research.",
       "href": "/evidence-and-trust",
       "label": "Explore Evidence & Trust"
     }

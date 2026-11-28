@@ -65,6 +65,7 @@ export const institutionalPublicRoutes = [
   "/work-with-us/public-service",
   "/work-with-us/funding",
   "/observatory/intellectual-lineage",
+  "/observatory/reference-library",
   "/observatory/research-architecture",
   "/observatory/computational-inquiry",
   "/observatory/demonstrations",

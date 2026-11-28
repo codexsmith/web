@@ -15,6 +15,7 @@ export const institutionalPublicationEntries = [
   { label: "Government and Public Service", href: "/work-with-us/public-service", tier: "supporting", purpose: "Explain scoped public-service and consequential-system repair opportunities.", parent: "/work-with-us" },
   { label: "Funding and support", href: "/work-with-us/funding", tier: "supporting", purpose: "Describe stewardship and support for specific work without conflating funding with evidence.", parent: "/work-with-us" },
   { label: "Intellectual Lineage", href: "/observatory/intellectual-lineage", tier: "supporting", purpose: "Explain how established disciplines and engineering practice motivated the research.", parent: "/observatory" },
+  { label: "Foundations & Reference Library", href: "/observatory/reference-library", tier: "supporting", purpose: "Provide a bibliographic-only catalog of selected reference works and external source locators.", parent: "/observatory" },
   { label: "Research Architecture", href: "/observatory/research-architecture", tier: "supporting", purpose: "Present the research architecture and explicit claim boundaries.", parent: "/observatory" },
   { label: "Computational Inquiry", href: "/observatory/computational-inquiry", tier: "supporting", purpose: "Explain persistent, inspectable, computationally assisted inquiry.", parent: "/observatory" },
   { label: "Selected Demonstrations", href: "/observatory/demonstrations", tier: "supporting", purpose: "Show selected examples with explicit assumptions and limited conclusions.", parent: "/observatory" },
